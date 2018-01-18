@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>定量监测数据</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
+		<style type="text/css">
+			body,
+			html {
+				background-color: #EFEFF4;
+			}
+			/*.mui-table-view-cell .mui-active {
+				background: #fff;
+			}*/
+			
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			
+			.mui-col-xs-2,
+			.mui-col-xs-10 {
+				overflow-y: auto;
+				height: 100%;
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			
+			.mui-control-content {
+				display: block;
+			}
+			
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+			}
+			
+			#segmentedControls {
+				margin-top: 0px;
+			}
+			
+			.color {
+				color: #007aff !important;
+				background-color: #fff;
+			}
+			
+			.mui-col-xs-2 {
+				background-color: #f2f2f2;
+			}
+			
+			.content_text {
+				width: 100%;
+				text-align: center;
+				display: inline-block;
+				color: #007aff;
+				font-size: 18px;
+			}
+			
+			.openPopover {
+				color: #007aff;
+			}
+			
+			.mui-popover {
+				height: 410px;
+				width: 90%;
+			}
+			
+			.tck {
+				top: 100px !important;
+				left: 0 !important;
+			}
+			
+			.mui-popover-arrow {
+				display: none;
+			}
+			
+			.mui-content-padded {
+				margin: 0px;
+			}
+			
+			.mui-popover {
+				top: 50px !important;
+				left: 5% !important;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 62px !important;
+				padding-bottom: 0px !important;
+			}
+			
+			.mui-bar-nav {
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="mui-content mui-row mui-fullscreen">
+			<div class="mui-col-xs-2">
+				<ul id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+
+				</ul>
+			</div>
+			<div id="layge" class="mui-col-xs-10" style="border-left: 1px solid #c8c7cc;">
+
+			</div>
+
+		</div>
+		<!--弹出内容-->
+		<div class="popup">
+
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-1.11.3.js"></script>
+		<script src="../js/mui.picker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				var li = "";
+				var layge_text = "";
+				var lsjcsj_text = [];
+				var popup_text = "";
+				$.ajax({
+					url: "../data/jcyj_hidden2.json",
+					async: false, //同步请求	
+					type: "get",
+					dataType: "json",
+					success: function(json) {
+						var data = json.data;
+						for(var i = 0; i < data.length; i++) {
+							li +=
+								'<li data-index="' + i + '">' +
+								'<a class="mui-control-item" href="#content' + i + '">' + data[i].jcdbh + '</a>' +
+								'</li>';
+							layge_text +=
+								'<div id="content' + i + '" class="mui-control-content" style="display: none;">' +
+								'<ul class="mui-table-view">' +
+								'<li class="mui-table-view-cell mui-collapse">' +
+								'<a class="mui-navigate-right" href="javascript:viod(0)">' +
+								'<div class="mui-row">' +
+								'<div class="mui-col-sm-12 mui-col-xs-12 content_text">基本信息</div></div></a>' +
+								'<div class="mui-collapse-content">' +
+								'<ul class="mui-table-view">' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">隐患点编号</span>' +
+								'<span class="mui-pull-right">' + data[i].bh + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">隐患点编名称</span>' +
+								'<span class="mui-pull-right">' + data[i].mc + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">经 度</span>' +
+								'<span class="mui-pull-right">' + data[i].jd + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">纬 度</span>' +
+								'<span class="mui-pull-right">' + data[i].wd + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">灾害类型</span>' +
+								'<span class="mui-pull-right">' + data[i].zhtype + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">危害等级</span>' +
+								'<span class="mui-pull-right">' + data[i].whdj + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">稳定性</span>' +
+								'<span class="mui-pull-right">' + data[i].wdx + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">片 所</span>' +
+								'<span class="mui-pull-right">' + data[i].ps + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">位 置</span>' +
+								'<span class="mui-pull-right">' + data[i].wz + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">监测人员</span>' +
+								'<span class="mui-pull-right">' + data[i].jcry + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">手机</span>' +
+								'<span class="mui-pull-right">' + data[i].cellphone + '</span></li>' +
+								'</ul></div></li>' +
+								'<li class="mui-table-view-cell mui-collapse mui-active">' +
+								'<a class="mui-navigate-right" href="#">' +
+								'<div class="mui-row">' +
+								'<div class="mui-col-sm-12 mui-col-xs-12 content_text">定量监测数据</div></div></a>' +
+								'<div class="mui-collapse-content">' +
+								'<ul class="mui-table-view">' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">监测点编号</span>' +
+								'<span class="mui-pull-right">' + data[i].jcdbh + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">建点时间</span>' +
+								'<span class="mui-pull-right">' + data[i].jdsj + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">监测点名称</span>' +
+								'<span class="mui-pull-right">' + data[i].jcdmc + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">合法半径</span>' +
+								'<span class="mui-pull-right">' + data[i].hfbj + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">是否损坏</span>' +
+								'<span class="mui-pull-right">' + data[i].sfsh + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<span class="mui-pull-left">监测方向</span>' +
+								'<span class="mui-pull-right">' + data[i].jcfx + '</span></li>' +
+								'<li class="mui-table-view-cell">' +
+								'<button type="button" class="mui-pull-left sjqxt">数据曲线图</button>' +
+								'<button type="button" class="mui-pull-right cktp">查看图片</button></li>' +
+								'</ul></div></li>' +
+								'<li class="mui-table-view-cell mui-collapse">' +
+								'<a class="mui-navigate-right" href="#">' +
+								'<div class="mui-row">' +
+								'<div class="mui-col-sm-12 mui-col-xs-12 content_text">历史监测数据</div></div></a>' +
+								'<div class="mui-collapse-content">' +
+								'<ul id="ck_lssj' + i + '" class="mui-table-view">' +
+								'</ul></div></li></ul>' +
+
+								'</div>';
+							var lsjcsj = data[i].lsjcsj;
+							lsjcsj_text[i] = '';
+							for(var e = 0; e < lsjcsj.length; e++) {
+								lsjcsj_text[i] +=
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">' + lsjcsj[e].slsj + '</span>' +
+									'<span class="mui-pull-right mui-content-padded"><a href="#middlePopover' + i + '_' + e + '" class="openPopover">查看</a></span>' +
+									'</li>';
+								var sfhf = lsjcsj[e].sfhf;
+								var sfhfImg = "";
+								var sjyxx = lsjcsj[e].sjyxx;
+								var sjyxxImg = "";
+								if(sfhf.indexOf("是") >= 0) {
+									sfhfImg = "../img/green.JPG";
+								} else {
+									sfhfImg = "../img/red.JPG";
+								}
+								if(sjyxx.indexOf("是") >= 0) {
+									sjyxxImg = "../img/green.JPG";
+								} else {
+									sjyxxImg = "../img/red.JPG";
+								}
+								popup_text +=
+									'<div class="mui-popover" id="middlePopover' + i + '_' + e + '">' +
+									'<div class="mui-popover-arrow"></div>' +
+									'<div class="mui-scroll-wrapper">' +
+									'<div class="mui-scroll">' +
+									'<ul class="mui-table-view">' +
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">监测点编号</span>' +
+									'<span class="mui-pull-right">' + data[i].bh + '</span>' +
+									'</li>' +
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">监测点名称</span>' +
+									'<span class="mui-pull-right">' + data[i].mc + '</span>' +
+									'</li>' +
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">监测点时间</span>' +
+									'<span class="mui-pull-right">' + lsjcsj[e].slsj + '</span>' +
+									'</li>' +
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">是否合法</span>' +
+									'<span class="mui-pull-right"><img src="' + sfhfImg + '"/></span>' +
+									'</li>' +
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">数据有限性</span>' +
+									'<span class="mui-pull-right"><img src="' + sjyxxImg + '"/></span>' +
+									'</li>' +
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">实测数据</span>' +
+									'<span class="mui-pull-right">' + lsjcsj[e].scsj + '</span>' +
+									'</li>' +
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">相邻告警</span>' +
+									'<span class="mui-pull-right">' + lsjcsj[e].xlgj + '</span>' +
+									'</li>' +
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">累计告警</span>' +
+									'<span class="mui-pull-right">' + lsjcsj[e].ljgj + '</span>' +
+									'</li>' +
+									'<li class="mui-table-view-cell">' +
+									'<span class="mui-pull-left">是否清空雨量筒</span>' +
+									'<span class="mui-pull-right">' + lsjcsj[e].sfqkylt + '</span>' +
+									'</li></ul></div></div></div>';
+							}
+						}
+						$("#segmentedControls").html(li);
+						$("#segmentedControls li:first-child").addClass('color');
+						$("#layge").html(layge_text);
+						$("#layge div:first-child").css("display", "block");
+						$("#layge div:first-child").addClass('mui-active');
+						for(var arr = 0; arr < data.length; arr++) {
+							$("#ck_lssj" + arr).append(lsjcsj_text[arr]);
+						}
+
+						$(".popup").html(popup_text);
+					}
+				});
+				$(".sjqxt").on("tap", function() {
+					mui.openWindow({
+						url: 'jcyj_sjqxt.html',
+						id: 'jcyj_sjqxt',
+						show: {
+							duration: 300,
+							aniShow: 'slide-in-bottom'
+						},
+						waiting: {
+							title: "正在加载，请稍后..."
+						}
+					});
+				});
+				$(".cktp").on("tap", function() {
+					mui.openWindow({
+						url: 'jcyj_cktp.html',
+						id: 'jcyj_cktp',
+						show: {
+							duration: 300,
+							aniShow: 'slide-in-bottom'
+						},
+						waiting: {
+							title: "正在加载，请稍后..."
+						}
+					});
+				});
+
+				$("#segmentedControls li").on("tap", function() {
+					$(this).parent().children().removeClass("color");
+					$(this).addClass("color");
+					var i = $(this).attr("data-index");
+					$("#content" + i).siblings().hide();
+					$("#content" + i).show();
+				});
+				mui('.mui-scroll-wrapper').scroll();
+			});
+		</script>
+	</body>
+
+</html>

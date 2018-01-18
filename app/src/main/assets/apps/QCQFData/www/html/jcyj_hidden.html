@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>隐患点数据</title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/reset.css" rel="stylesheet"/>
+		<link href="../css/index.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-tab-label{
+				font-size: 14px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="#" class="mui-action-back">
+				<span class="mui-icon mui-icon-arrowleft"></span>
+			</a>
+			<h1 id="title" class="mui-title">定量监测数据</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="jcyj_hiddenOne.html">
+				<span class="mui-tab-label">定量监测数据</span>
+			</a>
+			<a class="mui-tab-item" href="jcyj_hiddenTwo.html">
+				<span class="mui-tab-label">宏观观测数据</span>
+			</a>
+		</nav>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			var subpages = ['jcyj_hiddenOne.html', 'jcyj_hiddenTwo.html'];
+			var subpage_style = {
+				top: '45px',
+				bottom: '51px'
+			};
+			
+			var aniShow = {};
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				for (var i = 0; i < 3; i++) {
+					var temp = {};
+					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+					if (i > 0) {
+						sub.hide();
+					}else{
+						temp[subpages[i]] = "true";
+						mui.extend(aniShow,temp);
+					}
+					self.append(sub);
+				}
+			});
+			var activeTab = subpages[0];
+			var title = document.getElementById("title");
+			mui('.mui-bar-tab').on('tap', 'a', function(e) {
+				var targetTab = this.getAttribute('href');
+				if (targetTab == activeTab) {
+					return;
+				}
+				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+				if(mui.os.ios||aniShow[targetTab]){
+					plus.webview.show(targetTab);
+				}else{
+					var temp = {};
+					temp[targetTab] = "true";
+					mui.extend(aniShow,temp);
+					plus.webview.show(targetTab,"fade-in",300);
+				}
+				plus.webview.hide(activeTab);
+				activeTab = targetTab;
+			});
+			document.addEventListener('gohome', function() {
+				var defaultTab = document.getElementById("defaultTab");
+				mui.trigger(defaultTab, 'tap');
+				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+				if (defaultTab !== current) {
+					current.classList.remove('mui-active');
+					defaultTab.classList.add('mui-active');
+				}
+			});
+			
+		</script>
+	</body>
+
+</html>

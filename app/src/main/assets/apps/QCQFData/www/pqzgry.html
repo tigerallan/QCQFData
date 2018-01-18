@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>片区专管人员</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+		
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back">
+				<span class="mui-icon mui-icon-arrowleft"></span>
+			</a>
+			<h1 id="title" class="mui-title">片区专管人员</h1>
+		</header>
+		<div class="mui-scroll-wrapper mui-content">
+			<div class="mui-scroll">
+				<div id="bottom-pqzgy" >
+					<div class="box-top">
+						<input type="text" id="filterName" placeholder="请输入姓名查询">
+					</div>
+					<ul id="list" class="mui-table-view list1">
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="js/ipconfig.js"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		mui.init();
+		//搜索功能
+		$(function() {
+				$("#filterName").keyup(function() {
+					$("ul li").stop().hide()
+						.filter(":contains('" + ($(this).val()) + "')").show();
+				});
+			});
+		mui.plusReady(function() {
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005 
+			});
+			//获取参数
+			var info = JSON.parse(plus.storage.getItem("personal-information"));
+			var qxId = info[0].areaId;
+			var qxName = info[0].area_name;
+			ajaxData(ipconfig+"station/positioning/listAreaAdminData/"+ qxId).done(function(json) {
+				var data = json.data;
+				for(var i = 0; i < data.length; i++) {
+					var li = '<li class="mui-table-view-cell" id="' + data[i].id+ '">' +
+							'<a class="mui-navigate-right"><span class="name_ryab">' + data[i].admin_name + '</span><span class="phome">' + data[i].telephone + '</span></a>' +
+						'</li>';
+					$("#list").append(li);
+				}
+				table();
+				$(".mui-table-view-cell").on('tap', function() {
+					var id = $(this).attr('id');
+					mui.openWindow({
+						url: 'pqzgryxx_xq.html?id=' + id,
+						id: 'pqzgryxx_xq',
+						show: {
+							duration: 500,
+							aniShow: 'slide-in-bottom'
+						},
+						waiting: {
+							title: "正在加载，请稍后..."
+						}
+					})
+				});
+			});
+		});
+	</script>
+
+</html>

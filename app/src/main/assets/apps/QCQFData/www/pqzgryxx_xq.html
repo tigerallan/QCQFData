@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>人员信息详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back">
+				<span class="mui-icon mui-icon-arrowleft"></span>
+			</a>
+			<h1 id="title" class="mui-title">人员信息详情</h1>
+		</header>
+		<div id="bottom-ryxx_xq" class="mui-scroll-wrapper mui-content">
+			<div class="mui-scroll">
+				<ul class="mui-table-view list-renyuan">
+					<!--<li class="mui-table-view-cell">
+						
+							<div class="mui-row">
+								<div class="mui-col-sm-6 mui-col-xs-6 text">
+									<p>姓名：张三</p>
+									<p>性别：男</p>
+									<p>民族: 汉</p>
+									<p>工作岗位: 监测人</p>
+									<p>所属区县：万州区</p>
+								</div>
+								<div class="mui-col-sm-3 mui-col-xs-3 pohot">
+									<img src="img/1463995203691.png" />
+								</div>
+							</div>
+							<div class="mui-row">
+								<div class="mui-col-sm-9 mui-col-xs-9 text">
+									<p>电话：15423422862</p>
+									<p>所属片所:周家坝所</p>
+									<p>所属乡镇:钟鼓楼街道</p>
+									<p>村社: 吊龙村4组</p>
+									<p>出生年月:1959-07-15</p>
+									<p>学历: 高中</p>
+									<p>政治面貌:中共党员</p>
+									<p>IMSI:862659023935190</p>
+									<p>家庭住址:重庆万州区钟鼓楼街道吊龙村4组</p>
+									<p>监测点:
+										<a class="trouble">台观滑坡</a>
+									</p>
+								</div>
+							</div>
+					
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/ipconfig.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script>
+			mui.init();
+			var url = window.location.href;
+			url = decodeURI(url);
+			var data = getUrlData(url);
+			var ryid=data.id;
+			mui.plusReady(function() {
+				mui('.mui-scroll-wrapper').scroll({
+					deceleration: 0.0005
+				});
+				ajaxData(ipconfig + "station/positioning/getAreaAdminDetail/" +ryid).done(function(json) {
+					var data = json.data;
+					//性别
+					var gende = "";
+					if(data[0].gender == 1) {
+						gende = "男";
+					} else if(data[0].gender == 2) {
+						gende = "女";
+					}
+					for(var i = 0; i < data.length; i++) {
+						var li = '<li class="mui-table-view-cell">' +
+							'<div class="mui-row">' +
+							'<div class="mui-col-sm-6 mui-col-xs-6 text">' +
+							'<p>姓名：' + data[0].admin_name + '</p>' +
+							'<p>性别：' + gende + '</p>' +
+							'<p>年龄：' + data[0].age + '</p>' +
+							'<p>学历:' + data[0].degree + '</p>' +
+							'<p>乡镇名称: ' + data[0].town + '</p>' +
+							'</div><div class="mui-col-sm-3 mui-col-xs-3 pohot">' +
+							'<img src="' + ipconfig + 'station/image/read.do?filename=/upload/jiancetixi/daiyan-191afcdc2df04f4c938c6110c226b128.jpg' + '" />' +
+							'</div></div><div class="mui-row"><div class="mui-col-sm-9 mui-col-xs-9 text">' +
+							'<p>职位/职称：' + data[0].job + '</p>' +
+							'<p>个人电话:' + data[0].telephone + '</p>' +
+							'<p>联系电话：' + data[0].real_mobile + '</p>' +
+							'</div></div></li>';
+						$(".list-renyuan").append(li);
+					}
+				});
+				$(".trouble").on('tap', function() {
+					mui.openWindow({
+						url: 'html/jcyj_hidden.html',
+						id: 'jcyj_hidden',
+						show: {
+							duration: 500,
+							aniShow: 'slide-in-bottom'
+						},
+						waiting: {
+							title: "正在加载，请稍后..."
+						}
+					})
+				});
+			});
+		</script>
+	</body>
+
+</html>

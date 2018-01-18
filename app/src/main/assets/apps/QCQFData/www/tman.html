@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>我</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+
+	<body>
+		<div class="mui-scroll-wrapper" style="margin-top:10px;background:#efeff4;">
+			<div class="mui-scroll">
+				<ul class="mui-table-view list1">
+					<!--<li class="mui-table-view-cell">
+						<a href="javascript:;">姓名：
+							<span id="username" class="mui-pull-right"></span></a>
+					</li>-->
+					<li class="mui-table-view-cell">
+						<a href="javascript:;">账号：
+							<span id="loginname" class="mui-pull-right"></span></a>
+					</li>
+					<!--<li class="mui-table-view-cell">
+						<a href="javascript:;">职务：
+							<span id="work" class="mui-pull-right"></span></a>
+					</li>-->
+				</ul>
+				<ul class="mui-table-view list1">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" id="update" href="javascript:;">检查更新</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" id="canshu" href="javascript:;">参数设置</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" id="shaoyishao" href="javascript:;">扫一扫</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right" id="qchc" href="javascript:;">清除缓存</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view list1" style="margin-top:30px; background: #096993; color: #fff; border-radius: 5px;">
+					<li class="mui-table-view-cell" style="text-align: center;">
+						<a id="quit">退出登录</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/update.js"></script>
+	<script>
+		mui.init();
+		mui.plusReady(function() {
+			$("#quit").on('tap', function() {
+				var btnArray = ['否', '是'];
+				mui.confirm('确定退出？', '账号退出', btnArray, function(e) {
+					if(e.index == 1) {
+						setTimeout(function() {
+							plus.webview.close(plus.webview.currentWebview().indexID);
+						}, 300);
+						plus.storage.clear();
+						mui.openWindow({
+							url: 'login.html',
+							id: 'login',
+							extras: {
+								personID: plus.webview.currentWebview().id
+							}
+						});
+					}
+				})
+			});
+			
+			var info = JSON.parse(plus.storage.getItem("personal-information"));
+			$('#loginname').html(info[0].phone);
+			$("#update").on('click',function(){
+				initUpdate();
+			});
+			
+		});
+
+
+	</script>
+
+</html>

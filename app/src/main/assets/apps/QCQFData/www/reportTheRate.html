@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>人员管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+
+	<body>
+		<div class="mui-content reportTheRate">
+			<div class="boxflex">
+	     		<a id="qcqfry" class="mui-card" open-type="common">
+			     	<dl class="workmanage">
+			     		<dt><img src="img/qcqfry.png"/></dt>
+			     		<dd>群测群防人员</dd>
+			     	</dl>
+	     		</a>
+	     		<a id="pqzgry" class="pointmun mui-card" href="#">
+			     	<dl class="workmanage">
+			     		<dt><img src="img/pqzgry.png"/></dt>
+			     		<dd>片区专管人员</dd>
+			     	</dl>
+		     	</a>
+			</div>
+			<div class="boxflex">
+	     		<a id="zsry" class="pointmun mui-card" href="#">
+			     	<dl class="workmanage">
+			     		<dt><img src="img/zsry.png"/></dt>
+			     		<dd>驻守人员</dd>
+			     	</dl>
+		     	</a>
+		     	<a id="zhdgl" class="pointmun mui-card" href="#">
+			     	<dl class="workmanage">
+			     		<dt><img src="img/1_1.png"/></dt>
+			     		<dd>灾害点管理</dd>
+			     	</dl>
+		     	</a>
+			</div>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		mui.plusReady(function() {
+			$("#qcqfry").on('tap', function() {
+				mui.openWindow({
+					url: 'qcqfry.html',
+					id: 'qcqfry',
+					show: {
+						duration: 500,
+						aniShow: 'slide-in-bottom'
+					},
+					waiting: {
+						title: "正在加载，请稍后..."
+					}
+				})
+			});
+			$("#pqzgry").on('tap', function() {
+				mui.openWindow({
+					url: 'pqzgry.html',
+					id: 'pqzgry',
+					show: {
+						duration: 500,
+						aniShow: 'slide-in-bottom'
+					},
+					waiting: {
+						title: "正在加载，请稍后..."
+					}
+				})
+			});
+			$("#zsry").on('tap', function() {
+				mui.openWindow({
+					url: 'zsry.html',
+					id: 'zsry',
+					show: {
+						duration: 500,
+						aniShow: 'slide-in-bottom'
+					},
+					waiting: {
+						title: "正在加载，请稍后..."
+					}
+				})
+			});
+//			$("#zhdgl").on('tap', function() {
+//				mui.openWindow({
+//					url: '.html',
+//					id: 'erweima',
+//					show: {
+//						duration: 500,
+//						aniShow: 'slide-in-bottom'
+//					},
+//					waiting: {
+//						title: "正在加载，请稍后..."
+//					}
+//				})
+//			});
+		});
+	</script>
+
+</html>

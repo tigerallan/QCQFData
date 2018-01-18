@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>综合统计</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="mui-card">
+				<ul class="mui-table-view people">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">
+							<div class="mui-row">
+								<div class="mui-col-sm-3 mui-col-xs-3">
+									<img class="titleImg" src="img/2_3.png" />
+								</div>
+								<div class="mui-col-sm-9 mui-col-xs-9 context">
+									群测群防人员上报率
+									<p class="mui-ellipsis text_js">按月统计群测群防上报率</p>
+								</div>
+							</div>
+						</a>
+						<div class="mui-collapse-content mui-row">
+							<table id="monitor" class="table_head">
+								<tr class="quxian">
+									<th width="25%">乡镇</th>
+									<th width="25%">应上报</th>
+									<th width="25%">实上报</th>
+									<th width="25%">上报率</th>
+								</tr>
+							</table>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">
+							<div class="mui-row">
+								<div class="mui-col-sm-3 mui-col-xs-3">
+									<img class="titleImg" src="img/2_4.png" />
+								</div>
+								<div class="mui-col-sm-9 mui-col-xs-9 context">
+									片区专管人员上报率
+									<p class="mui-ellipsis text_js">按月统计片区专管人员周报上报率</p>
+								</div>
+							</div>
+						</a>
+						<div class="mui-collapse-content mui-row">
+							<table id="weekly" class="table_head">
+								<tr class="quxian">
+									<th width="20%">乡镇</th>
+									<th width="20%">上报人</th>
+									<th width="20%">应上报</th>
+									<th width="20%">实上报</th>
+									<th width="20%">上报率</th>
+								</tr>
+							</table>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right" href="#">
+							<div class="mui-row">
+								<div class="mui-col-sm-3 mui-col-xs-3">
+									<img class="titleImg" src="img/2_5.png" />
+								</div>
+								<div class="mui-col-sm-9 mui-col-xs-9 context">
+									驻守人员上报率
+									<p class="mui-ellipsis text_js">按月统计驻守人员上报率</p>
+								</div>
+							</div>
+						</a>
+						<div class="mui-collapse-content mui-row">
+							<table id="journal" class="table_head">
+								<tr class="quxian">
+									<th width="25%">上报人</th>
+									<th width="25%">应上报</th>
+									<th width="25%">实上报</th>
+									<th width="25%">上报率</th>
+								</tr>
+							</table>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/ipconfig.js"></script>
+	<script src="js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		mui.init();
+		mui.plusReady(function() {
+			//获取参数
+			var info = JSON.parse(plus.storage.getItem("personal-information"));
+			var qxId = info[0].areaId;
+			var qxName = info[0].area_name;
+			//片区专管人员周报情况统计
+			ajaxData(ipconfig + 'station/meteor/findAreaAdminRate/' + qxId).done(function(json) {
+				var data = json.data;
+				for(var i = 0; i < data.length; i++) {
+					var weeklyContent = "<tr>" +
+						"<td>" + data[i].weeklyTownship + "</td>" +
+						"<td class='sbr'>" + data[i].weeklyReportPerson + "</td>" +
+						"<td class='ysb'>" + data[i].weeklyEcho + "</td>" +
+						"<td class='ssb'>" + data[i].weeklyThen + "</td>" +
+						"<td class='sbl'>" + data[i].weeklyRate + "</td></tr>";
+					$("#weekly").append(weeklyContent);
+				}
+			});
+			//群测群防人员上报率findTabhumaninfoLv
+			ajaxData(ipconfig +'station/meteor/findTabhumaninfoLv/' + qxId).done(function(json) {
+				var data = json.data;
+				for(var i = 0; i < data.length; i++) {
+					var monitorContent = "<tr>" +
+						"<td>" + data[i].monitorTownship + "</td>" +
+						"<td class='ysb'>" + data[i].monitorEcho + "</td>" +
+						"<td class='ssb'>" + data[i].journalThen + "</td>" +
+						"<td class='sbl'>" + data[i].monitorRate + "</td></tr>" +
+						$("#monitor").append(monitorContent);
+				}
+			});
+
+			//驻守人员日志上报统计
+			ajaxData(ipconfig + "station/meteor/findTabworklogLv/" + qxId).done(function(json) {
+				var data = json.data;
+				for(var i = 0; i < data.length; i++) {
+					var journalContent = "<tr>" +
+						"<td>" + data[i].journalTownship + "</td>" +
+						"<td class='ysb'>" + data[i].journalecho + "</td>" +
+						"<td class='ssb'>" + data[i].journalThen + "</td>" +
+						"<td class='sbl'>" + data[i].journalRate + "</td></tr>" +
+						$("#journal").append(journalContent);
+				}
+			});
+			//获取参数
+			//			console.log(info[0].area_name);
+		});
+	</script>
+
+</html>
