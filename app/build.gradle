@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+  compileSdkVersion 26
+  defaultConfig {
+    applicationId "com.nandi.qcqfdata"
+    minSdkVersion 15
+    targetSdkVersion 26
+    versionCode 10000
+    versionName "1.0.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
+  implementation 'com.android.support:appcompat-v7:26.1.0'
+  implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'com.android.support.test:runner:1.0.1'
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+  implementation files('libs/audio.jar')
+  implementation files('libs/barcode.jar')
+  implementation files('libs/camera.jar')
+  implementation files('libs/contacts.jar')
+  implementation files('libs/device.jar')
+  implementation files('libs/downloader.jar')
+  implementation files('libs/file.jar')
+  implementation files('libs/gallery.jar')
+  implementation files('libs/geolocation.jar')
+  implementation files('libs/geolocation-system.jar')
+  implementation files('libs/gif.jar')
+  implementation files('libs/invocation.jar')
+  implementation files('libs/messaging.jar')
+  implementation files('libs/my-imageloader.jar')
+  implementation files('libs/my-nineoldandroids-2.4.0.jar')
+  implementation files('libs/mysonic.jar')
+  implementation files('libs/nativeObj.jar')
+  implementation files('libs/nativeui.jar')
+  implementation files('libs/navigatorui.jar')
+  implementation files('libs/nopermission.jar')
+  implementation files('libs/pdr.jar')
+  implementation files('libs/sensor.jar')
+  implementation files('libs/ui.jar')
+  implementation files('libs/uploader.jar')
+  implementation files('libs/xhr.jar')
+}
