@@ -12,7 +12,7 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
+		<header id="header" class="mui-bar mui-bar-nav">
 			<h1 id="title" class="mui-title">综合统计</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
@@ -30,12 +30,14 @@
 			</a>
 		</nav>
 		<script src="js/mui.min.js"></script>
+		<script src="js/index.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			 //mui初始化
+
 			mui.init();
 			var subpages = ['peopleManagement.html', 'reportTheRate.html', 'tman.html'];
 			var subpage_style = {
-				top: '45px',
+				top: immersed+45+'px',
 				bottom: '51px'
 			};
 			

@@ -63,13 +63,13 @@ html, body { background-color: #fff; }
 .box-top { width: 90%; margin: 10px auto 0px auto; }
 .box-top input { position: relative; width: 100%; height: 40px; border-radius: 5px; border: 1px solid #337AB7; outline: none; text-indent: 10px; font-size: 16px; background: url(../img/sx.png) no-repeat right; background-size: 30px; }
 
-#bottom-pqzgy .list-renyuan { line-height: 35px; }
-#bottom-pqzgy .list-renyuan .mui-table-view-cell .text { color: #000000; margin-left: 5%; }
-#bottom-pqzgy .list-renyuan .mui-table-view-cell .text .phome { color: #096993; margin-left: 10%; }
+#content .list-renyuan { line-height: 35px; }
+#content .list-renyuan .mui-table-view-cell .text { color: #000000; margin-left: 5%; }
+#content .list-renyuan .mui-table-view-cell .text .phome { color: #096993; margin-left: 10%; }
 
 /*人员信息*/
-#bottom-ryxx_xq .text { margin-left: 5%; font-size: 18px; letter-spacing: 1px; line-height: 35px; }
-#bottom-ryxx_xq .pohot { margin-left: 5%; }
-#bottom-ryxx_xq .pohot img { width: 122px; height: 176px; }
+#content .text { margin-left: 5%; font-size: 18px; letter-spacing: 1px; line-height: 35px; }
+#content .pohot { margin-left: 5%; }
+#content .pohot img { width: 122px; height: 176px; }
 
 /*# sourceMappingURL=index.css.map */
