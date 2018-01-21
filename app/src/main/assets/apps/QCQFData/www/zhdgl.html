@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>灾害点管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+		<style type="text/css">
+			#filterName {
+				width: 80%;
+			}
+			
+			#filterButton {
+				height: 40px;
+				border: 1px solid #337AB7;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">灾害点管理</h1>
+		</header>
+		<div id="content" class="mui-scroll-wrapper mui-content">
+			<div id="scroll1" class="mui-scroll">
+				<div class="box-top">
+					<input type="text" id="filterName" placeholder="请输入灾害类型查询">
+					<button id="filterButton">搜索</button>
+				</div>
+				<ul id="list" class="mui-table-view list1">
+
+				</ul>
+
+			</div>
+		</div>
+		<script src="js/mui.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+		<script type="text/javascript" src="js/ipconfig.js"></script>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+
+			mui.plusReady(function() {
+				mui('.mui-scroll-wrapper').scroll({
+					deceleration: 0.0005
+				});
+				//获取参数
+				var info = JSON.parse(plus.storage.getItem("personal-information"));
+				var qxId = info[0].areaId;
+				var ajaxUrl = ipconfig + "station/positioning/listDisastersInfoData/" + qxId + "/null/null/1/100";
+				$("#filterButton").off('tap').on("tap", function() {
+					$("#list").html("");
+					var titleC = $("#filterName").val();
+					ajaxUrl = ipconfig + "station/positioning/listDisastersInfoData/" + qxId + "/" + titleC + "/null/1/1000000";
+					ajaxData(ajaxUrl).done(function(json) {
+						var data = json.rows;
+						for(var i = 0; i < data.length; i++) {
+							var li = '<li class="mui-table-view-cell" id="' + data[i].id + '">' +
+								'<a class="mui-navigate-right"><span class="phome">' + data[i].name + '</span><span class="name_ryab">' + data[i].disasterType + '</span></a>' +
+								'</li>';
+							$("#list").append(li);
+						}
+						table();
+						$(".mui-table-view-cell").on('tap', function() {
+							var id = $(this).attr('id');
+							mui.openWindow({
+								url: 'zhdgl_xq.html?id=' + id,
+								id: 'zhdgl_xq',
+								show: {
+									duration: 500,
+									aniShow: 'slide-in-bottom'
+								},
+								waiting: {
+									title: "正在加载，请稍后..."
+								}
+							})
+						});
+					});
+				});
+
+				ajaxData(ajaxUrl).done(function(json) {
+					var data = json.rows;
+					for(var i = 0; i < data.length; i++) {
+						var li = '<li class="mui-table-view-cell" id="' + data[i].id + '">' +
+							'<a class="mui-navigate-right"><span class="phome">' + data[i].name + '</span><span class="name_ryab">' + data[i].disasterType + '</span></a>' +
+							'</li>';
+						$("#list").append(li);
+					}
+
+					table();
+					$(".mui-table-view-cell").on('tap', function() {
+						var id = $(this).attr('id');
+						mui.openWindow({
+							url: 'zhdgl_xq.html?id=' + id,
+							id: 'zhdgl_xq',
+							show: {
+								duration: 500,
+								aniShow: 'slide-in-bottom'
+							},
+							waiting: {
+								title: "正在加载，请稍后..."
+							}
+						})
+					});
+				});
+
+				document.getElementById('scroll1').addEventListener('scrollend', function(e) {
+					if(e.detail.y <= e.detail.maxScrollY) {
+						plus.nativeUI.toast('请尝试搜索需要的灾害点信息！');
+					}
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

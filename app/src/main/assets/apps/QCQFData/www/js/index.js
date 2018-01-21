@@ -27,17 +27,15 @@ function table() {
 }
 
 var immersed = 0;
-var ms=(/Html5Plus\/.+\s\(.*(Immersed\/(\d+\.?\d*).*)\)/gi).exec(navigator.userAgent);
-if(ms&&ms.length>=3){ // 当前环境为沉浸式状态栏模式
-  immersed=parseFloat(ms[2]);// 获取状态栏的高度
+var ms = (/Html5Plus\/.+\s\(.*(Immersed\/(\d+\.?\d*).*)\)/gi).exec(navigator.userAgent);
+if(ms && ms.length >= 3) { // 当前环境为沉浸式状态栏模式
+	immersed = parseFloat(ms[2]); // 获取状态栏的高度
 }
 
-var t=document.getElementById('header'),
-  c=document.getElementById('content');
-t&&(t.style.paddingTop=immersed+'px', t.style.height=t.offsetHeight+immersed+'px');
-c&&(c.style.paddingTop=parseInt(window.getComputedStyle(c)['padding-top'])+immersed+'px');
-
-alert(JSON.stringify(t.offsetHeight));
+var t = document.getElementById('header'),
+	c = document.getElementById('content');
+t && (t.style.paddingTop = immersed + 'px', t.style.height = t.offsetHeight + immersed + 'px');
+c && (c.style.paddingTop = parseInt(window.getComputedStyle(c)['padding-top']) + immersed + 'px');
 
 function getUrlData(url) {
 	var returnData = null;
@@ -50,4 +48,9 @@ function getUrlData(url) {
 		}
 	}
 	return returnData;
+}
+
+function errorImg(img) {
+	img.src = "img/defaults.jpg";
+	img.onerror = null;
 }

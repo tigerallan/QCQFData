@@ -72,6 +72,7 @@
 				mui('.mui-scroll-wrapper').scroll({
 					deceleration: 0.0005
 				});
+				
 				ajaxData(ipconfig + "station/positioning/getAreaAdminDetail/" +ryid).done(function(json) {
 					var data = json.data;
 					//性别
@@ -81,7 +82,9 @@
 					} else if(data[0].gender == 2) {
 						gende = "女";
 					}
+					
 					for(var i = 0; i < data.length; i++) {
+						
 						var li = '<li class="mui-table-view-cell">' +
 							'<div class="mui-row">' +
 							'<div class="mui-col-sm-6 mui-col-xs-6 text">' +
@@ -91,7 +94,7 @@
 							'<p>学历:' + data[0].degree + '</p>' +
 							'<p>乡镇名称: ' + data[0].town + '</p>' +
 							'</div><div class="mui-col-sm-3 mui-col-xs-3 pohot">' +
-							'<img src="' + ipconfig + 'station/image/read.do?filename=/upload/jiancetixi/daiyan-191afcdc2df04f4c938c6110c226b128.jpg' + '" />' +
+							'<img src="' + ipconfig + 'station/image/read.do?filename=/'+ data[0].admin_pic + '" onerror="errorImg(this)"/>' +
 							'</div></div><div class="mui-row"><div class="mui-col-sm-9 mui-col-xs-9 text">' +
 							'<p>职位/职称：' + data[0].job + '</p>' +
 							'<p>个人电话:' + data[0].telephone + '</p>' +

@@ -31,10 +31,10 @@
 						<div class="mui-collapse-content mui-row">
 							<table id="monitor" class="table_head">
 								<tr class="quxian">
-									<th width="25%">乡镇</th>
-									<th width="25%">应上报</th>
-									<th width="25%">实上报</th>
-									<th width="25%">上报率</th>
+									<th width="32%">乡镇</th>
+									<th width="20%">应上报</th>
+									<th width="20%">实上报</th>
+									<th width="28%">上报率</th>
 								</tr>
 							</table>
 						</div>
@@ -54,10 +54,10 @@
 						<div class="mui-collapse-content mui-row">
 							<table id="weekly" class="table_head">
 								<tr class="quxian">
-									<th width="20%">乡镇</th>
+									<th width="30%">乡镇</th>
 									<th width="20%">上报人</th>
-									<th width="20%">应上报</th>
-									<th width="20%">实上报</th>
+									<th width="15%">应上报</th>
+									<th width="15%">实上报</th>
 									<th width="20%">上报率</th>
 								</tr>
 							</table>
@@ -110,7 +110,7 @@
 						"<td class='sbr'>" + data[i].weeklyReportPerson + "</td>" +
 						"<td class='ysb'>" + data[i].weeklyEcho + "</td>" +
 						"<td class='ssb'>" + data[i].weeklyThen + "</td>" +
-						"<td class='sbl'>" + data[i].weeklyRate + "</td></tr>";
+						"<td class='sbl'>" + data[i].weeklyRate + "%</td></tr>";
 					$("#weekly").append(weeklyContent);
 				}
 			});
@@ -122,7 +122,7 @@
 						"<td>" + data[i].monitorTownship + "</td>" +
 						"<td class='ysb'>" + data[i].monitorEcho + "</td>" +
 						"<td class='ssb'>" + data[i].journalThen + "</td>" +
-						"<td class='sbl'>" + data[i].monitorRate + "</td></tr>" +
+						"<td class='sbl'>" + data[i].monitorRate + "%</td></tr>" +
 						$("#monitor").append(monitorContent);
 				}
 			});
@@ -135,7 +135,7 @@
 						"<td>" + data[i].journalTownship + "</td>" +
 						"<td class='ysb'>" + data[i].journalecho + "</td>" +
 						"<td class='ssb'>" + data[i].journalThen + "</td>" +
-						"<td class='sbl'>" + data[i].journalRate + "</td></tr>" +
+						"<td class='sbl'>" + data[i].journalRate + "%</td></tr>" +
 						$("#journal").append(journalContent);
 				}
 			});

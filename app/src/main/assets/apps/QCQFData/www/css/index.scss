@@ -152,10 +152,12 @@ body {
 
 .name_ryab {
     display: inline-block;
-    width: 100px;
+    width: 150px;
 }
 
 .phome {
+    display: inline-block;
+    width: 200px;
     line-height: 25px;
     color: $backgrund-color;
     //  display: inline-block;
@@ -175,10 +177,10 @@ body {
         border-radius: 5px;
         border: 1px solid #337AB7;
         outline: none;
-        text-indent: 10px;
         font-size: 16px;
         background: url(../img/sx.png) no-repeat right;
-        background-size: 30px;
+        background-size: 20px;
+        background-position-x: 96%;
     }
 }
 

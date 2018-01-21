@@ -13,9 +13,9 @@
 	</head>
 
 	<body>
-		<div class="mui-scroll-wrapper" style="margin-top:10px;background:#efeff4;">
+		<div class="mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<ul class="mui-table-view list1">
+				<ul class="mui-table-view list1" style="margin-top: 20px;">
 					<!--<li class="mui-table-view-cell">
 						<a href="javascript:;">姓名：
 							<span id="username" class="mui-pull-right"></span></a>
@@ -32,15 +32,6 @@
 				<ul class="mui-table-view list1">
 					<li class="mui-table-view-cell">
 						<a class="mui-navigate-right" id="update" href="javascript:;">检查更新</a>
-					</li>
-					<li class="mui-table-view-cell">
-						<a class="mui-navigate-right" id="canshu" href="javascript:;">参数设置</a>
-					</li>
-					<li class="mui-table-view-cell">
-						<a class="mui-navigate-right" id="shaoyishao" href="javascript:;">扫一扫</a>
-					</li>
-					<li class="mui-table-view-cell">
-						<a class="mui-navigate-right" id="qchc" href="javascript:;">清除缓存</a>
 					</li>
 				</ul>
 				<ul class="mui-table-view list1" style="margin-top:30px; background: #096993; color: #fff; border-radius: 5px;">
@@ -77,7 +68,7 @@
 			});
 			
 			var info = JSON.parse(plus.storage.getItem("personal-information"));
-			$('#loginname').html(info[0].phone);
+			$('#loginname').html(info[0].iphone);
 			$("#update").on('click',function(){
 				initUpdate();
 			});

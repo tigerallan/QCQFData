@@ -1,75 +1,156 @@
 @charset "UTF-8";
-html, body { background-color: #fff; }
+html,
+body {
+  background-color: #fff; }
 
 /*修改mui的内容*/
-.mui-content { background-color: #fff; }
+.mui-content {
+  background-color: #fff; }
 
-.mui-bar-tab .mui-tab-item .mui-icon { top: 0; }
+.mui-bar-tab .mui-tab-item .mui-icon {
+  top: 0; }
 
-.mui-bar-tab .mui-tab-item .mui-icon ~ .mui-tab-label { font-size: 14px; }
+.mui-bar-tab .mui-tab-item .mui-icon ~ .mui-tab-label {
+  font-size: 14px; }
 
-.mui-icon-arrowleft:before { content: '\e582'; color: #FFFFFF; }
+.mui-icon-arrowleft:before {
+  content: '\e582';
+  color: #FFFFFF; }
 
-.mui-icon-back:before, .mui-icon-left-nav:before { content: '\e471'; color: #FFFFFF; }
+.mui-icon-back:before,
+.mui-icon-left-nav:before {
+  content: '\e471';
+  color: #FFFFFF; }
 
-.shangbaolv { width: 50px; height: 50px; }
+.shangbaolv {
+  width: 50px;
+  height: 50px; }
 
-.shangbaolv_text { margin-top: -10px; }
+.shangbaolv_text {
+  margin-top: -10px; }
 
-.list1 { width: calc(100%-20px); margin: 0 10px; }
+.list1 {
+  width: calc(100%-20px);
+  margin: 0 10px; }
 
 /*头部样式*/
-.mui-bar-nav { -webkit-box-shadow: 0 1px 6px #096993; box-shadow: 0 1px 6px #096993; background-color: #096993; }
-.mui-bar-nav #title { color: #FFFFFF; }
+.mui-bar-nav {
+  -webkit-box-shadow: 0 1px 6px #096993;
+  box-shadow: 0 1px 6px #096993;
+  background-color: #096993; }
+  .mui-bar-nav #title {
+    color: #FFFFFF; }
 
 /*底部样式*/
-.mui-bar-tab { background-color: #fff; }
+.mui-bar-tab {
+  background-color: #fff; }
 
 /*统计样式*/
-.mui-table-view-cell.mui-collapse.mui-active .mui-collapse-content, .mui-table-view-cell.mui-collapse.mui-active .mui-table-view { display: block !important; }
+.mui-table-view-cell.mui-collapse.mui-active .mui-collapse-content,
+.mui-table-view-cell.mui-collapse.mui-active .mui-table-view {
+  display: block !important; }
 
-.text_js { font-size: 14px; position: relative; top: -15px; right: 0%; }
+.text_js {
+  font-size: 14px;
+  position: relative;
+  top: -15px;
+  right: 0%; }
 
-.titleImg { width: 60px; }
+.titleImg {
+  width: 60px; }
 
-.context { height: 60px; line-height: 40px; font-size: 18px; }
+.context {
+  height: 60px;
+  line-height: 40px;
+  font-size: 18px; }
 
-.quxian { color: #096993; }
+.quxian {
+  color: #096993; }
 
-.table_head .sbr { color: #6641E2; }
-.table_head .ysb { color: green; }
-.table_head .ssb { color: orange; }
-.table_head .sbl { color: red; }
+.table_head .sbr {
+  color: #6641E2; }
+.table_head .ysb {
+  color: green; }
+.table_head .ssb {
+  color: orange; }
+.table_head .sbl {
+  color: red; }
 
 /*人员管理*/
-.reportTheRate .boxflex:nth-last-child(1) { margin-bottom: 10px; }
-.reportTheRate .boxflex { display: flex; }
-.reportTheRate .boxflex .mui-card { display: inline-block; height: 150px; padding: 15px; flex: 1; }
-.reportTheRate .boxflex .mui-card .workmanage { text-align: center; }
-.reportTheRate .boxflex .mui-card .workmanage img { width: 60px; }
-.reportTheRate .boxflex .mui-card .workmanage dd { margin: 20px 0 0 0; text-align: center; font-size: 17px; color: #337AB7; }
-.reportTheRate .boxflex a:nth-child(1) { margin-right: 0px; }
-.reportTheRate .boxflex a { margin-bottom: 0px; }
+.reportTheRate .boxflex:nth-last-child(1) {
+  margin-bottom: 10px; }
+.reportTheRate .boxflex {
+  display: flex; }
+  .reportTheRate .boxflex .mui-card {
+    display: inline-block;
+    height: 150px;
+    padding: 15px;
+    flex: 1; }
+    .reportTheRate .boxflex .mui-card .workmanage {
+      text-align: center; }
+      .reportTheRate .boxflex .mui-card .workmanage img {
+        width: 60px; }
+      .reportTheRate .boxflex .mui-card .workmanage dd {
+        margin: 20px 0 0 0;
+        text-align: center;
+        font-size: 17px;
+        color: #337AB7; }
+  .reportTheRate .boxflex a:nth-child(1) {
+    margin-right: 0px; }
+  .reportTheRate .boxflex a {
+    margin-bottom: 0px; }
 
-.one { background-color: aliceblue; }
+.one {
+  background-color: aliceblue; }
 
-.two { background-color: white; }
+.two {
+  background-color: white; }
 
-.name_ryab { display: inline-block; width: 100px; }
+.name_ryab {
+  display: inline-block;
+  width: 150px; }
 
-.phome { line-height: 25px; color: #096993; }
+.phome {
+  display: inline-block;
+  width: 200px;
+  line-height: 25px;
+  color: #096993; }
 
 /*片区专管员*/
-.box-top { width: 90%; margin: 10px auto 0px auto; }
-.box-top input { position: relative; width: 100%; height: 40px; border-radius: 5px; border: 1px solid #337AB7; outline: none; text-indent: 10px; font-size: 16px; background: url(../img/sx.png) no-repeat right; background-size: 30px; }
+.box-top {
+  width: 90%;
+  margin: 10px auto 0px auto; }
+  .box-top input {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #337AB7;
+    outline: none;
+    font-size: 16px;
+    background: url(../img/sx.png) no-repeat right;
+    background-size: 20px;
+    background-position-x: 96%; }
 
-#content .list-renyuan { line-height: 35px; }
-#content .list-renyuan .mui-table-view-cell .text { color: #000000; margin-left: 5%; }
-#content .list-renyuan .mui-table-view-cell .text .phome { color: #096993; margin-left: 10%; }
+#content .list-renyuan {
+  line-height: 35px; }
+  #content .list-renyuan .mui-table-view-cell .text {
+    color: #000000;
+    margin-left: 5%; }
+    #content .list-renyuan .mui-table-view-cell .text .phome {
+      color: #096993;
+      margin-left: 10%; }
 
 /*人员信息*/
-#content .text { margin-left: 5%; font-size: 18px; letter-spacing: 1px; line-height: 35px; }
-#content .pohot { margin-left: 5%; }
-#content .pohot img { width: 122px; height: 176px; }
+#content .text {
+  margin-left: 5%;
+  font-size: 18px;
+  letter-spacing: 1px;
+  line-height: 35px; }
+#content .pohot {
+  margin-left: 5%; }
+  #content .pohot img {
+    width: 122px;
+    height: 176px; }
 
 /*# sourceMappingURL=index.css.map */
