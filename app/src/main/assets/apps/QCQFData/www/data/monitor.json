@@ -1,0 +1,78 @@
+{
+    "meta": {
+        "success": true,
+        "message": "ok"
+    },
+    "data": [
+        {	
+        	"id": "0",
+            "monitorTownship": "武陵镇",
+            "monitorEcho": "1",
+            "monitorThen": "1",
+            "monitorRate": "100%"
+        },
+        {	
+        	"id": "1",
+            "monitorTownship": "甘宁镇",
+            "monitorEcho": "1",
+            "monitorThen": "1",
+            "monitorRate": "100%"
+        },
+        {	
+        	"id": "2",
+            "monitorTownship": "龙沙镇",
+            "monitorEcho": "1",
+            "monitorThen": "1",
+            "monitorRate": "100%"
+        },
+        {	
+        	"id": "3",
+            "monitorTownship": "响水镇",
+            "monitorEcho": "1",
+            "monitorThen": "1",
+            "monitorRate": "100%"
+        },
+        {	
+        	"id": "4",
+            "monitorTownship": "武陵镇",
+            "monitorEcho": "1",
+            "monitorThen": "0",
+            "monitorRate": "0%"
+        },
+        {	
+        	"id": "5",
+            "monitorTownship": "瀼渡镇",
+            "monitorEcho": "1",
+            "monitorThen": "0",
+            "monitorRate": "0%"
+        },
+        {	
+        	"id": "6",
+            "monitorTownship": "天城镇",
+            "monitorEcho": "1",
+            "monitorThen": "0",
+            "monitorRate": "0%"
+        },
+        {	
+        	"id": "7",
+            "monitorTownship": "熊家镇",
+            "monitorEcho": "1",
+            "monitorThen": "0",
+            "monitorRate": "0%"
+        },
+        {	
+        	"id": "8",
+            "monitorTownship": "小周镇",
+            "monitorEcho": "1",
+            "monitorThen": "0",
+            "monitorRate": "0%"
+        },
+        {	
+        	"id": "9",
+            "monitorTownship": "大周镇",
+            "monitorEcho": "1",
+            "monitorThen": "0",
+            "monitorRate": "0%"
+        }
+    ]
+}

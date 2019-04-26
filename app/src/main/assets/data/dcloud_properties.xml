@@ -4,8 +4,8 @@
     <!--<feature name="Speech" value="io.dcloud.feature.speech.SpeechFeatureImpl">
       <module name="iFly" value="io.dcloud.feature.speech.IflySpeechEngine"/>
     </feature>
-    <feature name="Maps" value="io.dcloud.js.map.amap.JsMapPluginImpl"/>
-    <feature name="Maps" value="io.dcloud.js.map.JsMapPluginImpl"/>-->
+    <feature name="Maps" value="io.dcloud.js.map.amap.JsMapPluginImpl"/>-->
+    <feature name="Maps" value="io.dcloud.js.map.JsMapPluginImpl"/>
     <feature name="Contacts" value="io.dcloud.feature.contacts.ContactsFeatureImpl"/>
     <feature name="Messaging" value="io.dcloud.adapter.messaging.MessagingPluginImpl"/>
     <feature name="Camera" value="io.dcloud.js.camera.CameraFeatureImpl"/>
@@ -16,7 +16,8 @@
     <feature name="Storage" value="io.dcloud.feature.pdr.NStorageFeatureImpl"/>
     <feature name="Cache" value="io.dcloud.feature.pdr.CoreCacheFeatureImpl"/>
     <feature name="Invocation" value="io.dcloud.invocation.Invocation"/>
-    <feature name="Navigator" value="io.dcloud.feature.ui.navigator.NavigatorUIFeatureImpl"/>
+    <feature name="Navigator"
+             value="io.dcloud.feature.ui.navigator.NavigatorUIFeatureImpl"/>
     <feature name="NativeUI" value="io.dcloud.feature.ui.nativeui.NativeUIFeatureImpl"/>
     <feature name="UI" value="io.dcloud.feature.ui.UIFeatureImpl">
       <module name="Navigator" value="io.dcloud.feature.ui.NavView"/>
@@ -33,7 +34,8 @@
     <feature name="Runtime" value="io.dcloud.feature.pdr.RuntimeFeatureImpl"/>
     <feature name="XMLHttpRequest" value="io.dcloud.net.XMLHttpRequestFeature"/>
     <!--<feature name="Statistic" value="io.dcloud.feature.statistics.StatisticsFeatureImpl"/>-->
-    <feature name="Accelerometer" value="io.dcloud.feature.sensor.AccelerometerFeatureImpl"/>
+    <feature name="Accelerometer"
+             value="io.dcloud.feature.sensor.AccelerometerFeatureImpl"/>
     <feature name="Orientation" value="io.dcloud.feature.sensor.OrientationFeatureImpl"/>
     <feature name="NativeObj" value="io.dcloud.feature.nativeObj.FeatureImpl"/>
     <feature name="Geolocation" value="io.dcloud.js.geolocation.GeolocationFeatureImpl"/>
@@ -61,6 +63,6 @@
     <!--<service name="push" value="io.dcloud.feature.aps.APSFeatureImpl"/>-->
     <!--<service name="Statistic" value="io.dcloud.feature.statistics.StatisticsBootImpl"/>-->
     <service name="Downloader" value="io.dcloud.net.DownloaderBootImpl"/>
-    <!--<service name="Maps" value="io.dcloud.js.map.MapInitImpl"/>-->
+    <service name="Maps" value="io.dcloud.js.map.MapInitImpl"/>
   </services>
 </properties>

@@ -24,6 +24,9 @@
 			<div class="mui-scroll">
 				<div id="bottom-pqzgy">
 					<div class="box-top">
+					<select id="sellect" onchange="townname(this)">
+						<option value="">选择乡镇</option>
+					</select>
 						<input type="text" id="filterName" placeholder="请输入姓名查询">
 					</div>
 					<ul id="list" class="mui-table-view list1">
@@ -41,10 +44,12 @@
 	<script type="text/javascript">
 		mui.init();
 		//搜索功能
+			function townname(ts){
+				$("ul li").stop().hide().filter(":contains('" +$('#filterName').val()+ "')").find(".area_name").filter(":contains('" + $(ts).val() + "')").parent().parent().show()
+			}
 		$(function() {
 				$("#filterName").keyup(function() {
-					$("ul li").stop().hide()
-						.filter(":contains('" + ($(this).val()) + "')").show();
+					$("ul li").stop().hide().filter(":contains('" + ($(this).val()) + "')").find(".area_name").filter(":contains('" + $("#sellect").val() + "')").parent().parent().show();
 				});
 			});
 		mui.plusReady(function() {
@@ -59,7 +64,7 @@
 				var data = json.data;
 				for(var i = 0; i < data.length; i++) {
 					var li = '<li class="mui-table-view-cell" id="' + data[i].id+ '">' +
-							'<a class="mui-navigate-right"><span class="name_ryab">' + data[i].admin_name + '</span><span class="phome">' + data[i].telephone + '</span></a>' +
+							'<a class="mui-navigate-right"><span class="area_name" style="margin:0px;float:left; width:30%;text-align:left;">'+ (data[i].town||"暂无") +'</span><span class="name_ryab" style="width:30%;">' + data[i].admin_name + '</span><span class="phome" style="width:30%;">' + data[i].telephone + '</span></a>' +
 						'</li>';
 					$("#list").append(li);
 				}
@@ -81,5 +86,5 @@
 			});
 		});
 	</script>
-
+	<script src="js/townlist.js" type="text/javascript" charset="utf-8"></script>
 </html>

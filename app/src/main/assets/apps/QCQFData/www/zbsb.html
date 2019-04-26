@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>人员管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">专报上报</h1>
+		</header>
+		<div id="content" class="mui-content reportTheRate">
+			<div class="boxflex">
+	     		<a id="tfzq" class="mui-card" open-type="common">
+			     	<dl class="workmanage">
+			     		<dt><img src="img/zq.png"/></dt>
+			     		<dd>灾情上报</dd>
+			     	</dl>
+	     		</a>
+	     		<a id="xqsb" class="mui-card" open-type="common">
+			     	<dl class="workmanage">
+			     		<dt><img src="img/xq.png"/></dt>
+			     		<dd>险情上报</dd>
+			     	</dl>
+	     		</a>
+			</div>
+			<!--<div class="boxflex" style="width: 49%;">
+	     		<a id="jbqk" class="mui-card" open-type="common">
+			     	<dl class="workmanage">
+			     		<dt><img src="img/bs.png"/></dt>
+			     		<dd>基本情况及已采取措施</dd>
+			     	</dl>
+	     		</a>
+			</div>-->
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		mui.plusReady(function() {
+			$("#tfzq").on('tap', function() {
+				mui.openWindow({
+					url: 'tfdzzh.html',
+					id: 'tfzq',
+					show: {
+						duration: 500,
+						aniShow: 'slide-in-bottom'
+					},
+					waiting: {
+						title: "正在加载，请稍后..."
+					}
+				})
+			});
+			$("#xqsb").on('tap', function() {
+				mui.openWindow({
+					url: 'xqsb.html',
+					id: 'xqsb',
+					show: {
+						duration: 500,
+						aniShow: 'slide-in-bottom'
+					},
+					waiting: {
+						title: "正在加载，请稍后..."
+					}
+				})
+			});
+			$("#jbqk").on('tap', function() {
+				mui.openWindow({
+					url: 'basic_situation.html',
+					id: 'jbqk',
+					show: {
+						duration: 500,
+						aniShow: 'slide-in-bottom'
+					},
+					waiting: {
+						title: "正在加载，请稍后..."
+					}
+				})
+			});
+		});
+	</script>
+
+</html>

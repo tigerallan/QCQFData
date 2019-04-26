@@ -15,7 +15,6 @@ body {
 .mui-bar-tab .mui-tab-item .mui-icon {
     top: 0;
 }
-
 .mui-bar-tab .mui-tab-item .mui-icon~.mui-tab-label {
     font-size: 14px;
 }
@@ -89,9 +88,21 @@ body {
 
 .quxian {
     color: $backgrund-color;
+    text-align: center;
+}
+input[type="date"]:before{
+    color:#A9A9A9;
+    content:attr(placeholder);
 }
 
+
+input[type="date"].full:before {
+    color:black;
+    content:""!important;
+}
 .table_head {
+    table-layout:fixed;
+    td{white-space:nowrap; overflow:hidden;  text-overflow:ellipsis;}
     .sbr {
         color: #6641E2;
     }
@@ -105,7 +116,8 @@ body {
         color: red;
     }
 }
-
+.quxiannum{
+}
 
 /*人员管理*/
 
@@ -152,25 +164,70 @@ body {
 
 .name_ryab {
     display: inline-block;
-    width: 150px;
+    width: 35%;
 }
+//新增加样式
+.cl_well{
+    color: $backgrund;
+}
+.area_name {
+  display: inline-block;
+  width: 60%;
+  margin-top:8px;
+  line-height: 25px;
+  text-align: right;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #999;
+   }
+.area_title{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+    display: inline-block;
+    margin-top: -3px;
+    width: 35%;
+  color: #999;
+}
+
+.t_right{
+    float: right;
+    text-align: right!important;
+}
+
 
 .phome {
     display: inline-block;
-    width: 200px;
+    //width: 60px;
     line-height: 25px;
-    color: $backgrund-color;
+    //color: $backgrund-color;
     //  display: inline-block;
     //  margin-left: 50px;
+      width: 60%;
+      color: #096993;
+      text-align: right;
 }
-
-
+ .phome_zh{
+  display: inline-block;
+  width: 65%;
+  line-height: 25px;
+  color: #096993;
+   }
+.setbut{
+    width: 100%; background-color: #efefef; margin: 0px; height: 40px; line-height: 42px; padding: 0px; border:0px;font-size: .8rem;
+}
+.bg_qcry{display: flex; background-color: #efefef; height: 42px;  margin-bottom: 10px;border-bottom: 1px solid #999;}
+.bg_select{float: left; display: flex; border-right: 1px solid #ccc;}
+.pqry{font-size: .8rem; display: flex; margin: 0px; padding: 0px auto; text-align: center; background-color: #efefef;}
 /*片区专管员*/
 
 .box-top {
     width: 90%;
     margin: 10px auto 0px auto;
+    display: flex;
     input {
+        float: left;
         position: relative;
         width: 100%;
         height: 40px;
@@ -182,15 +239,33 @@ body {
         background-size: 20px;
         background-position-x: 96%;
     }
+    select{
+        float: left;width: 46%; margin:0px 1% 0px 0px;border: 1px solid #337AB7!important;
+        height: 40px;
+        border-radius: 5px;
+        border: 1px solid #337AB7;
+        outline: none;
+        font-size: 16px;
+    }
 }
-
+.dh_zzms{
+    padding:14px;
+    h1{
+        font-size: 16px;
+        line-height: 35px;
+    }
+    p{
+        line-height: 20px;
+        font-size: 14px;
+        color: #000;
+    }
+}
 #content {
     .list-renyuan {
         line-height: 35px;
         .mui-table-view-cell {
             .text {
                 color: #000000;
-                margin-left: 5%;
                 .phome {
                     color: $backgrund-color;
                     margin-left: 10%;
@@ -205,7 +280,6 @@ body {
 
 #content {
     .text {
-        margin-left: 5%;
         font-size: 18px;
         letter-spacing: 1px;
         line-height: 35px;
@@ -217,4 +291,27 @@ body {
             height: 176px;
         }
     }
+}
+
+//地质灾害消息报送表
+.g_dzzh{
+    float: right;
+    width: 65%;
+    margin-bottom: 0;
+    padding-left: 0;
+    border: 0;
+    font-size: 0.9rem!important;
+    margin: 0px!important;
+    color: cornflowerblue;
+    padding: 0px;
+    line-height: 37px;
+    text-align: left;
+}
+textarea.g_dzzh{
+    line-height: 20px;
+    padding: 10px auto;
+}
+.g_font{
+    font-size: 0.9rem!important;
+    margin-top: 1px;
 }

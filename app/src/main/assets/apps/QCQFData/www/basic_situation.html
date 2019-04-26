@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>现情况上报</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+		<style>
+			.mui-dtpicker-title{display: none;}
+			.mui-picker{background: #fff;}
+		</style>
+	</head>
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">现情况上报</h1>
+		</header>
+		<br />
+		<div id="content" class="mui-content reportTheRate mui-input-group ">
+			<div class="mui-input-row" style="height: auto; display: none; line-height: 20px;">
+				<label class="g_font">提交地点：</label>	
+				<input type="text" id="address" class="g_dzzh" placeholder="区（县）乡镇（街道）村社（路）小地名"/>
+				<div id="allmap" style="width: 100%; height: 150px;"></div>
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">基本情况上报：</label>	
+				<textarea type="text" style="height: 150px;padding: 8px 0px;" deta="基本情况" class="g_dzzh dh_dw bg_set" placeholder="如灾害规模、原因初步分析、已采取措施、下一步工作建议等"></textarea>
+			</div>
+			<div style="width: 100%; margin-top: 20px;">
+				<input type="submit" style="width: 100%;color: #fff; height:50px;background: #0075A9;" onclick="subzh()" value="立即上报" />
+			</div>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="js/ipconfig.js"></script>
+	<script src="js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=vIKdrR4ZY0GKS5GLuZASzolABKoUQnwd"></script>
+	<script>
+	mui.init();
+	var idp=""
+	mui.plusReady(function() {
+	var info = JSON.parse(plus.storage.getItem("personal-information"));
+		idp=info[0].areaId;
+	})
+	function subzh(){
+		var i=0,s=$(".bg_set").length;
+		$(".bg_set").each(function(){
+			++i;
+			if($(this).val()==""){
+				mui.alert("请填写"+$(this).attr("deta"))
+				return false;
+			}else if(i==s){	
+				subtj();
+			}
+		})
+	}
+	function subtj(){
+		plus.nativeUI.showWaiting("上报中...");
+		var ha_lon=$("#address").attr("name");
+		var ha_lat=$("#address").attr("title");
+		var source=$(".dh_dw").val();
+		mui.ajax({
+			type:"post",
+			url:ipconfig + "station/positioning/addDihuanReport.do",
+			data:{
+				"dihuan_id":idp,
+				"lon":ha_lon,
+				"lat":ha_lat,
+				"base_situation":source,//基本情况
+				"s_type":2 //1灾情，2险情
+			},
+			async:true,
+			success:function(rs){
+				mui.alert("成功");
+				plus.nativeUI.closeWaiting();
+				$(".dh_dw").val("");
+			},
+			error:function(){
+				mui.alert("提交失败")
+				plus.nativeUI.closeWaiting();
+			}
+		})
+	}
+	/*百度地图*/
+	var map = new BMap.Map("allmap");
+    //初始化地图 默认加载北京天安门
+    var point = new BMap.Point(116.331398, 39.897445);
+    map.centerAndZoom(point, 32); //初始化地图，point为中心点，缩放级别为16
+    //判断手机浏览器是否支持定位
+    if(navigator.geolocation) {
+        var geolocation = new BMap.Geolocation(); //创建定位实例
+        geolocation.getCurrentPosition(showLocation, {
+            enableHighAccuracy: true
+        }); //enableHighAccuracy 要求浏览器获取最佳结果
+    } else {
+        map.addControl(new BMap.GeolocationControl()); //添加定位控件 支持定位
+    }
+    var gc = new BMap.Geocoder();//将坐标转换成地址
+
+    //处理定位后的信息
+    function showLocation(r) {
+        if(this.getStatus() == BMAP_STATUS_SUCCESS) { //定位成功
+            //新建中心点 并将地图中心移动过去
+            var centerPoint = new BMap.Point(r.longitude, r.latitude);
+            map.panTo(centerPoint);
+            map.setCenter(centerPoint);
+            gc.getLocation(centerPoint,function(rs){
+                var addComp = rs.addressComponents;  
+                var mapAddress = addComp.province + addComp.city + addComp.district  
+                + addComp.street + addComp.streetNumber;   
+                //mui.alert(mapAddress);
+                var address = document.getElementById('address');
+                address.value=mapAddress;
+                address.readOnly='readonly';
+                console.log(centerPoint.lng,centerPoint.lat)
+                /*经纬度*/
+                address.name=centerPoint.lng;
+                address.title=centerPoint.lat;
+            });
+            //新建标注
+            var mk = new BMap.Marker(centerPoint);
+            mk.disableDragging(); // 不可拖拽
+            map.addOverlay(mk);
+        } else {
+            mui.alert('failed' + this.getStatus()); //定位失败
+        }
+    }
+	(function($) {
+		$.init();
+		var result = $('#result')[0];
+		var btns = $('.btn');
+		btns.each(function(i, btn) {
+			btn.addEventListener('tap', function() {
+				var _self = this;
+				var optionsJson = this.getAttribute('data-options') || '{}';
+				var options = JSON.parse(optionsJson);
+				var id = this.getAttribute('id');
+				_self.picker = new mui.DtPicker({
+					type: "datetime", //设置日历初始视图模式    //真正的月份比写的多一个月。  type的类型你还是可以选择date, datetime month time  hour 
+					beginDate: new Date(2000, 04, 02),
+					endDate: new Date(), //设置结束日期    //真正的是10.21
+				})
+				_self.picker.show(function(rs) {
+					btn.value = rs.text;
+					btn.innerText = rs.text;
+					_self.picker.dispose();
+					_self.picker = null;
+				});
+			}, false);
+		});
+	})(mui);
+	</script>
+</html>

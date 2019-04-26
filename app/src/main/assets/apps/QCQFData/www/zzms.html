@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>地环站工作职责</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">地环站工作职责</h1>
+		</header>
+		<div id="content" class="mui-content">
+			<div class="mui-card dh_zzms">
+				<p>（一）负责对群测群防员或乡镇（街道）上报的地质灾害隐患点进行实地核实，并形成调查报告。
+				<br/>（二）参与地质灾害防治规划的编制，负责拟定本区县地质灾害防灾预案和应急抢险预案。
+				<br/>（三）负责本行政区域内地质灾害的监测工作，参与地质灾害预测预报工作，在政府的领导下，建立地质灾害“群测群防、群专结合”的监测、预警、预报体系，组织地质灾害防治及“群测群防”的宣传、培训工作。
+				<br/>（四）负责地质灾害抢险救灾技术指导工作。
+				<br/>（五）做好片区负责人、驻守地质队员的的监督、管理和考核工作。
+				<br/>（六）做好本行政区域地质灾害数据库、应急指挥系统维护和地质灾害信息报送工作。
+				</p>
+			</div>
+		</div>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/ipconfig.js"></script>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			mui.init();
+			$.ajax({
+				type:"get",
+				url:ipconfig+"station/positioning/findJobDute/4",
+				async:true,
+				success:function(rs){
+					console.log(rs.data)
+					$(".dh_zzms p").html(rs.data[0].content);
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -19,6 +19,18 @@
 				height: 40px;
 				border: 1px solid #337AB7;
 			}
+			/*.phome {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}*/
+			
+			.name_ryab {
+				position: absolute;
+				top: 17px;
+				width: 80px;
+				text-align: right;
+			}
 		</style>
 	</head>
 
@@ -30,8 +42,11 @@
 		<div id="content" class="mui-scroll-wrapper mui-content">
 			<div id="scroll1" class="mui-scroll">
 				<div class="box-top">
-					<input type="text" id="filterName" placeholder="请输入灾害类型查询">
-					<button id="filterButton">搜索</button>
+					<select id="sellect" onchange="chings(this)">
+						<option value="">选择乡镇</option>
+					</select>
+					<input type="text" id="filterName" onkeyup="chings(this)" placeholder="请输入灾害类型查询">
+					<!--<button id="filterButton">搜索</button>-->
 				</div>
 				<ul id="list" class="mui-table-view list1">
 
@@ -44,25 +59,33 @@
 		<script type="text/javascript" src="js/ipconfig.js"></script>
 		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			//搜索功能
+			function townname(ts){
+				$("ul li").stop().hide().find(".area_name").filter(":contains('" + $(ts).val() + "')").parent().parent().parent().show()
+			}
 			mui.init();
-
-			mui.plusReady(function() {
-				mui('.mui-scroll-wrapper').scroll({
-					deceleration: 0.0005
-				});
-				//获取参数
+			function chings(th){
 				var info = JSON.parse(plus.storage.getItem("personal-information"));
 				var qxId = info[0].areaId;
 				var ajaxUrl = ipconfig + "station/positioning/listDisastersInfoData/" + qxId + "/null/null/1/100";
-				$("#filterButton").off('tap').on("tap", function() {
+				
 					$("#list").html("");
-					var titleC = $("#filterName").val();
-					ajaxUrl = ipconfig + "station/positioning/listDisastersInfoData/" + qxId + "/" + titleC + "/null/1/1000000";
+					var titleC = $("#filterName").val(),areas=$("#sellect").val();
+					if(titleC == "" && areas=="") {
+						ajaxUrl = ipconfig + "station/positioning/listDisastersInfoData/" + qxId + "/null/null/1/100";
+					} else {
+						if(titleC == ""){
+							ajaxUrl = ipconfig + "station/positioning/listDisastersInfoData/" + qxId + "/null/null/1/1000000.do?areaName=" + areas;
+						}else{
+							ajaxUrl = ipconfig + "station/positioning/listDisastersInfoData/" + qxId + "/" + titleC + "/null/1/1000000.do?areaName=" + areas;
+						}
+						
+					}
 					ajaxData(ajaxUrl).done(function(json) {
 						var data = json.rows;
 						for(var i = 0; i < data.length; i++) {
 							var li = '<li class="mui-table-view-cell" id="' + data[i].id + '">' +
-								'<a class="mui-navigate-right"><span class="phome">' + data[i].name + '</span><span class="name_ryab">' + data[i].disasterType + '</span></a>' +
+								'<a class="mui-navigate-right"><span class="phome_zh" >' + data[i].name + '</span><span class="name_ryab t_right">' + data[i].disasterType + '</span><br/><p><span class="area_title">所属乡镇：</span><span class="area_name">'+ (data[i].area_name||"暂无") +'</span></p></a>' +
 								'</li>';
 							$("#list").append(li);
 						}
@@ -82,13 +105,24 @@
 							})
 						});
 					});
+			}
+			mui.plusReady(function() {
+				mui('.mui-scroll-wrapper').scroll({
+					deceleration: 0.0005
+				});
+				//获取参数
+				var info = JSON.parse(plus.storage.getItem("personal-information"));
+				var qxId = info[0].areaId;
+				var ajaxUrl = ipconfig + "station/positioning/listDisastersInfoData/" + qxId + "/null/null/1/100";
+				$("#filterName").off('tap').on("tap", function() {
+					
 				});
 
 				ajaxData(ajaxUrl).done(function(json) {
 					var data = json.rows;
 					for(var i = 0; i < data.length; i++) {
 						var li = '<li class="mui-table-view-cell" id="' + data[i].id + '">' +
-							'<a class="mui-navigate-right"><span class="phome">' + data[i].name + '</span><span class="name_ryab">' + data[i].disasterType + '</span></a>' +
+							'<a class="mui-navigate-right"><span class="phome_zh">' + data[i].name + '</span><span class="name_ryab t_right">' + data[i].disasterType + '</span><br/><p><span class="area_title">所属乡镇：</span><span class="area_name">'+ (data[i].area_name||"暂无") +'</span></p></a>' +
 							'</li>';
 						$("#list").append(li);
 					}
@@ -118,6 +152,7 @@
 
 			});
 		</script>
+		<script src="js/townlist.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>

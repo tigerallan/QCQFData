@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>首页</title>
 		<link href="css/mui.min.css" rel="stylesheet" />
-		<link href="css/reset.css" rel="stylesheet"/>
+		<link href="css/reset.css" rel="stylesheet" />
 		<link href="css/index.css" rel="stylesheet" />
-		
 	</head>
 
 	<body>
 		<header id="header" class="mui-bar mui-bar-nav">
+			<div class="mui-icon mui-icon-info cl_well"></div>
 			<h1 id="title" class="mui-title">综合统计</h1>
 		</header>
 		<nav class="mui-bar mui-bar-tab">
@@ -24,80 +23,107 @@
 				<span class="mui-icon mui-icon-compose"></span>
 				<span class="mui-tab-label">工作管理</span>
 			</a>
-			<a class="mui-tab-item" href="tman.html">
+			<a id="tman" class="mui-tab-item" href="tman.html">
 				<span class="mui-icon mui-icon-person"></span>
 				<span class="mui-tab-label">个人中心</span>
 			</a>
 		</nav>
 		<script src="js/mui.min.js"></script>
+		<script src="js/ipconfig.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/index.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			 //mui初始化
-
+			//mui初始化
 			mui.init();
+			//查看工作职责
+			mui('.mui-bar').on('tap', '.cl_well', function(e) {
+				mui.openWindow({  
+			    url: './zzms.html',  
+			    waiting: {  
+			        autoShow: true, //自动显示等待框，默认为true  
+			        title: '正在加载...', //等待对话框上显示的提示内容  
+			    }  
+			})  
+			})
 			var subpages = ['peopleManagement.html', 'reportTheRate.html', 'tman.html'];
 			var subpage_style = {
-				top: immersed+45+'px',
+				top: immersed + 45 + 'px',
 				bottom: '51px'
 			};
-			
+
 			var aniShow = {};
-			
-			 //创建子页面，首个选项卡页面显示，其它均隐藏；
+			var iphone = '';
+			//创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
+
+				plus.geolocation.watchPosition(function(p){
+					console.log('Geolocation\nLatitude:' + p.coords.latitude + '\nLongitude:' + p.coords.longitude + '\nAltitude:' + p.coords.altitude);
+				}, function(e){
+					console.log('Geolocation error: ' + e.message);
+				});
+
+				var info = JSON.parse(plus.storage.getItem("personal-information"));
+					iphone = info[0].iphone;
 				var self = plus.webview.currentWebview();
-				for (var i = 0; i < 3; i++) {
+				for(var i = 0; i < 3; i++) {
 					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
-					if (i > 0) {
+					console.log(sub);
+					if(i > 0) {
 						sub.hide();
-					}else{
+					} else {
 						temp[subpages[i]] = "true";
-						mui.extend(aniShow,temp);
+						mui.extend(aniShow, temp);
 					}
 					self.append(sub);
 				}
+
 			});
-			 //当前激活选项
+			//当前激活选项
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
-			 //选项卡点击事件
+			//选项卡点击事件
 			mui('.mui-bar-tab').on('tap', 'a', function(e) {
 				var targetTab = this.getAttribute('href');
-				if (targetTab == activeTab) {
+				if(targetTab == activeTab) {
 					return;
 				}
 				//更换标题
 				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
 				//显示目标选项卡
 				//若为iOS平台或非首次显示，则直接显示
-				if(mui.os.ios||aniShow[targetTab]){
+				if(mui.os.ios || aniShow[targetTab]) {
 					plus.webview.show(targetTab);
-				}else{
+				} else {
 					//否则，使用fade-in动画，且保存变量
 					var temp = {};
 					temp[targetTab] = "true";
-					mui.extend(aniShow,temp);
-					plus.webview.show(targetTab,"fade-in",300);
+					mui.extend(aniShow, temp);
+					plus.webview.show(targetTab, "fade-in", 300);
 				}
 				//隐藏当前;
 				plus.webview.hide(activeTab);
 				//更改当前活跃的选项卡
 				activeTab = targetTab;
 			});
-			 //自定义事件，模拟点击“首页选项卡”
+			
 			document.addEventListener('gohome', function() {
-				var defaultTab = document.getElementById("defaultTab");
-				//模拟首页点击
-				mui.trigger(defaultTab, 'tap');
-				//切换选项卡高亮
-				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
-				if (defaultTab !== current) {
-					current.classList.remove('mui-active');
-					defaultTab.classList.add('mui-active');
-				}
+				alert('aaaaaa');
 			});
 			
+			//自定义事件，模拟点击“首页选项卡”
+//			document.addEventListener('gohome', function() {
+//				var defaultTab = document.getElementById("defaultTab");
+//				//模拟首页点击
+//				mui.trigger(defaultTab, 'tap');
+//				//切换选项卡高亮
+//				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+//				if(defaultTab !== current) {
+//					current.classList.remove('mui-active');
+//					defaultTab.classList.add('mui-active');
+//				}
+//			});
+
 			var backButtonPress = 0;
 
 			mui.back = function(event) {
@@ -112,6 +138,45 @@
 				}, 1000);
 				return false;
 			};
+			
+			
+			setInterval(function() {
+				onPlusReady();
+			}, 10800000);
+			// 扩展API加载完毕后调用onPlusReady回调函数 
+			document.addEventListener('plusready', onPlusReady, false);
+			// 扩展API加载完毕，现在可以正常调用扩展API
+			function onPlusReady() {
+				plus.geolocation.getCurrentPosition(function(p) {
+//					alert(p.coords.longitude);
+//					alert(p.coords.latitude);
+//					alert(iphone);
+//					alert('Geolocation\nLatitude:' + p.coords.latitude + '\nLongitude:' + p.coords.longitude + '\nAltitude:' + p.coords.altitude);
+					ajaxData(ipconfig+'station/positioning/uploadPositioning/'+iphone+'/'+p.coords.longitude+'/'+p.coords.latitude+'/').done(function(json){
+//					ajaxData("http://183.230.108.112:8185/station/positioning/uploadPositioning/13983527699/108.123/36.123/").done(function(json){
+						console.log(json);
+					});
+				}, function(e) {
+					console.log('Gelocation Error: code - ' + e.code + '; message - ' + e.message);
+					switch(e.code) {
+						case e.PERMISSION_DENIED:
+							alert('User denied the request for Geolocation.');
+							break;
+						case e.POSITION_UNAVAILABLE:
+							alert('Location information is unavailable.');
+							break;
+						case e.TIMEOUT:
+							alert('The request to get user location timed out.');
+							break;
+						case e.UNKNOWN_ERROR:
+							alert('An unknown error occurred.');
+							break;
+					}
+				}, {
+					provider: 'bd09ll'
+				});
+				
+			}
 		</script>
 	</body>
 

@@ -1,4 +1,4 @@
-<hbuilder version="1.9.9.39354">
+<hbuilder version="1.9.9.39354" debug="true">
   <apps>
     <app appid="QCQFData" appver="1.0.0"/>
   </apps>

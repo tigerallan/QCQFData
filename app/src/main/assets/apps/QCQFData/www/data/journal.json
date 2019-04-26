@@ -1,0 +1,78 @@
+{
+    "meta": {
+        "success": true,
+        "message": "ok"
+    },
+    "data": [
+        {	
+        	"id": "0",
+            "journalTownship": "杨尚1",
+            "journalecho": "1",
+            "journalThen": "1",
+            "journalRate": "100%"
+        },
+        {	
+        	"id": "1",
+            "journalTownship": "赵勇",
+            "journalecho": "1",
+            "journalThen": "1",
+            "journalRate": "100%"
+        },
+        {	
+        	"id": "2",
+            "journalTownship": "向磊",
+            "journalecho": "1",
+            "journalThen": "1",
+            "journalRate": "100%"
+        },
+        {	
+        	"id": "3",
+            "journalTownship": "张文伟",
+            "journalecho": "1",
+            "journalThen": "1",
+            "journalRate": "100%"
+        },
+        {	
+        	"id": "4",
+            "journalTownship": "刘葵丰",
+            "journalecho": "1",
+            "journalThen": "0",
+            "journalRate": "0%"
+        },
+        {	
+        	"id": "5",
+            "journalTownship": "李维",
+            "journalecho": "1",
+            "journalThen": "0",
+            "journalRate": "0%"
+        },
+        {	
+        	"id": "6",
+            "journalTownship": "赵彦亮",
+            "journalecho": "1",
+            "journalThen": "0",
+            "journalRate": "0%"
+        },
+        {	
+        	"id": "7",
+            "journalTownship": "唐俊刚",
+            "journalecho": "1",
+            "journalThen": "0",
+            "journalRate": "0%"
+        },
+        {	
+        	"id": "8",
+            "journalTownship": "马俊南",
+            "journalecho": "1",
+            "journalThen": "0",
+            "journalRate": "0%"
+        },
+        {	
+        	"id": "9",
+            "journalTownship": "冯池",
+            "journalecho": "1",
+            "journalThen": "0",
+            "journalRate": "0%"
+        }
+    ]
+}

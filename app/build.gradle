@@ -50,4 +50,9 @@ dependencies {
   implementation files('libs/ui.jar')
   implementation files('libs/uploader.jar')
   implementation files('libs/xhr.jar')
+  implementation files('libs/BaiduLBS_Android_base.jar')
+  implementation files('libs/BaiduLBS_Android_geolocation_v7.1.jar')
+  implementation files('libs/BaiduLBS_Android_v4.3.1.jar')
+  implementation files('libs/geolocation-baidu.jar')
+  implementation files('libs/map-baidu.jar')
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title>群测群防人员</title>
@@ -20,6 +19,9 @@
 		<div id="content" class="mui-scroll-wrapper mui-content">
 			<div class="mui-scroll">
 				<div class="box-top">
+					<select id="sellect" onchange="townname(this)">
+						<option value="">选择乡镇</option>
+					</select>
 					<input type="text" id="filterName" placeholder="请输入姓名查询">
 				</div>
 				<ul id="list" class="mui-table-view list1">
@@ -33,10 +35,12 @@
 		<script type="text/javascript">
 			mui.init();
 			//搜索功能
+			function townname(ts){
+				$("ul li").stop().hide().filter(":contains('" +$('#filterName').val()+ "')").find(".area_name").filter(":contains('" + $(ts).val() + "')").parent().parent().show()
+			}
 			$(function() {
 				$("#filterName").keyup(function() {
-					$("ul li").stop().hide()
-						.filter(":contains('" + ($(this).val()) + "')").show();
+					$("ul li").stop().hide().filter(":contains('" +$(this).val()+ "')").find(".area_name").filter(":contains('" + $("#sellect").val() + "')").parent().parent().show();
 				});
 			});
 
@@ -52,8 +56,8 @@
 					var data = json.data;
 					for(var i = 0; i < data.length; i++) {
 						var li = '<li class="mui-table-view-cell" id="' + data[i].id + '">' +
-							'<a class="mui-navigate-right"><span class="name_ryab">' + data[i].admin_name + '</span><span class="phome">' + data[i].real_mobile + '</span></a>' +
-							'</li>';
+							'<a class="mui-navigate-right"><span class="area_name" style="width:30%;text-align:left;margin:0px;float:left;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">'+ (data[i].area_name||"暂无") +'</span><span class="name_ryab" style="width:30%;float:left;line-height: 25px;overflow: hidden; white-space: nowrap;text-overflow: ellipsis;">' + data[i].admin_name + '</span><span class="phome" style="width:30%;line-height: 25px;">' + data[i].real_mobile + '</span></a>'
+							+'</li>';
 						$("#list").append(li);
 					}
 					table();
@@ -74,6 +78,7 @@
 				});
 			});
 		</script>
+		<script src="js/townlist.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
 </html>

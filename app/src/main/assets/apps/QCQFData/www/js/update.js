@@ -18,7 +18,7 @@
  }
  *
  */
-var server = "http://183.230.108.112:8076/wish/test/update.json", //获取升级描述文件服务器地址
+var server = "https://www.allanzdl.red/apps/QCQFData/update.json", //获取升级描述文件服务器地址
 	localDir = "update",
 	localFile = "update.json", //本地保存升级描述目录和文件名
 	keyUpdate = "updateCheck", //取消升级键名

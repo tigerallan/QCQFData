@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>灾情上报</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
+		<link href="css/reset.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+		<style>
+			.mui-dtpicker-title{display: none;}
+			.mui-picker{background: #fff;}
+		</style>
+	</head>
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">灾情信息报送表</h1>
+		</header>
+		<br />
+		<div id="content" class="mui-content reportTheRate mui-input-group ">
+			<div class="mui-input-row">
+				<label class="g_font">上报来源：</label>	
+				<select deta="上报来源" class="g_dzzh source bg_set mui-btn-block">
+					<option value="">请选择</option>
+					<option value="路人/村民">路人/村民</option>
+					<option value="乡镇工作人员 ">乡镇工作人员 </option>
+					<option value="群测群防员">群测群防员</option>
+					<option value="驻守队员">驻守队员</option>
+					<option value="片区负责人">片区负责人</option>
+					<option value="区县地环站 ">区县地环站 </option>
+				</select>
+			</div>
+			<div class="mui-input-row">
+				<label class="g_font">灾发时间：</label>	
+				<button id='demo1' deta="灾发时间" data-options='{}' class="btn g_dzzh bg_set mui-btn-block">受灾日期时间 ...</button>
+			</div>
+			<label style="color: #999; display: inline-block;line-height: 30px;padding: 0px 15px;margin-top: 10px; ">受灾地点:</label>
+			
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">区（县）：</label>	
+				<input type="text" deta="区（县）" class="g_dzzh zh_qx bg_set" placeholder="请输入 区（县）" />
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">乡镇（街道）：</label>	
+				<input type="text" deta="乡镇（街道）" class="g_dzzh zh_jd bg_set" placeholder="请输入 乡镇（街道）" />
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">村社（路）：</label>	
+				<input type="text" deta="村社（路）" class="g_dzzh zh_cl bg_set" placeholder="村社（路）" />
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">小地名：</label>	
+				<input type="text" deta="小地名" class="g_dzzh zh_xdm bg_set" placeholder="请输入小地名" />
+			</div>
+			<div class="mui-input-row" style="height: auto; display: none; line-height: 20px;">
+				<label class="g_font">提交地点：</label>	
+				<input type="text" id="address" class="g_dzzh" placeholder="区（县）乡镇（街道）村社（路）小地名"/>
+				<div id="allmap" style="width: 100%; height: 150px;"></div>
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">灾害类型：</label>	
+				<select  deta="灾害类型" class="g_dzzh dis_type bg_set mui-btn-block">
+					<option value="">请选择</option>
+					<option value="滑坡">滑坡</option>
+					<option value="崩塌 ">崩塌</option>
+					<option value="泥石流">泥石流</option>
+					<option value="地裂缝">地裂缝</option>
+					<option value="地面沉降">地面沉降</option>
+					<option value="地面塌陷">地面塌陷</option>
+				</select>
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">灾情等级：</label>	
+				<select  deta="灾情等级" class="g_dzzh dis_dj bg_set mui-btn-block">
+					<option value="">请选择</option>
+					<option value="小型">小型</option>
+					<option value="中型">中型</option>
+					<option value="大型">大型</option>
+					<option value="特大型">特大型</option>
+				</select>
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">防护点：</label>	
+				<select deta="防护点" class="g_dzzh mui-btn-block bg_set">
+					<option value="">请选择</option>
+					<option value="新生突发">新生突发</option>
+					<option value="已有库区点 ">已有库区点</option>
+					<option value="已有非库区防点">已有非库区防点</option>
+				</select>
+			</div>
+			<label style="color: #999; display: inline-block;line-height: 30px;padding: 0px 15px;margin-top: 10px; ">伤亡情况:</label>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">死亡：</label>
+				<input type="text" deta="死亡人数" class="g_dzzh dh_sw bg_set" placeholder="请填写对应人数" />
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">受伤：</label>
+				<input type="text" deta="受伤人数" class="g_dzzh dh_zs bg_set" placeholder="请填写对应人数" />
+			</div>
+			<!--<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">轻伤：</label>
+				<input type="text" deta="轻伤人数" class="g_dzzh dh_qs bg_set" placeholder="请填写对应人数" />
+			</div>-->
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">失踪：</label>
+				<input type="text" deta="失踪人数" class="g_dzzh dh_sl bg_set" placeholder="请填写对应人数" />
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">威胁对象：</label>	
+				<textarea type="text" style="min-height: 80px;padding: 8px 0px;" deta="威胁对象" id="nums" class="g_dzzh bg_set" placeholder="群众：实际人口 房屋：数量、程度 道路：国道/省道/村道"></textarea>
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">经济受损情况：</label>	
+				<textarea type="text" style="min-height: 80px;padding: 8px 0px;" deta="经济受损情况" class="g_dzzh dh_jj bg_set" placeholder="房屋、道路、河道等受损情况？初步估算经济损失？"></textarea>
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">相关单位到位情况：</label>	
+				<textarea type="text" style="min-height: 80px;padding: 8px 0px;" deta="相关单位到位情况" class="g_dzzh dh_dw bg_set" placeholder="区县国土房管局、地环站、驻守单位驻守专家及队员到位情况？"></textarea>
+			</div>
+			<div class="mui-input-row" style="height: auto; line-height: 20px;">
+				<label class="g_font">基本情况上报：</label>	
+				<textarea type="text" style="height: 150px;padding: 8px 0px;" deta="基本情况" class="g_dzzh base_name bg_set" placeholder="如灾害规模、原因初步分析、已采取措施、下一步工作建议等"></textarea>
+			</div>
+			<div style="width: 100%; margin-top: 20px;">
+				<input type="submit" style="width: 100%;color: #fff; height:50px;background: #0075A9;" onclick="subzh()" value="立即上报" />
+			</div>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/mui.picker.min.js"></script>
+	<script type="text/javascript" src="js/ipconfig.js"></script>
+	<script src="js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=vIKdrR4ZY0GKS5GLuZASzolABKoUQnwd"></script>
+	<script>
+	mui.init();
+	var idp=""
+	mui.plusReady(function() {
+	var info = JSON.parse(plus.storage.getItem("personal-information"));
+		idp=info[0].areaId;
+	})
+	function subzh(){
+		var i=0,s=$(".bg_set").length;
+		$(".bg_set").each(function(){
+			++i;
+			if($(this).val()==""){
+				mui.alert("请填写"+$(this).attr("deta"))
+				return false;
+			}else if(i==s){	
+				subtj();
+			}
+		})
+	}
+	function subtj(){
+		plus.nativeUI.showWaiting("上报中...");
+		var ha_time=$("#demo1").text();
+		var ha_qx=$(".zh_qx").val();
+		var ha_jd=$(".zh_jd").val();
+		var ha_cl=$(".zh_cl").val();
+		var ha_xdm=$(".zh_xdm").val();
+		var ha_lon=$("#address").attr("name");
+		var ha_lat=$("#address").attr("title");
+		var ha_type=$(".dis_type").val();
+		var ha_dj=$(".dis_dj").val();//灾情等级
+		var ha_zs=$(".dh_zs").val();//重伤
+		var ha_sw=$(".dh_sw").val();//死亡
+		/*var ha_qs=$(".dh_qs").val();//轻伤*/
+		var ha_sl=$(".dh_sl").val();//失联
+		var ha_wx=$("#nums").val();//威胁对象
+		var ha_jj=$(".dh_jj").val();//经济受损情况
+		var ha_dw=$(".dh_dw").val();//相关单位到位情况
+		var hurt=ha_sw+','+ha_zs+','+ha_sl;
+		var source=$(".source").val();
+		var base_name=$(".base_name").val();
+		mui.ajax({
+			type:"post",
+			url:ipconfig + "station/positioning/addDihuanReport.do",
+			data:{
+				"dihuan_id":idp,
+				"source":source,
+				"happen_time":ha_time,
+				"place":ha_qx+ha_jd+ha_cl+ha_xdm,
+				"lon":ha_lon,
+				"lat":ha_lat,
+				"dis_type":ha_type,
+				"hurt":hurt,
+				"threat":ha_wx,
+				"economics":ha_jj,
+				"nuit_receive":ha_dw,
+				"level":ha_dj,
+				"base_situation":base_name,//基本情况
+				"s_type":1 //1灾情，2险情
+			},
+			async:true,
+			success:function(rs){
+				mui.alert("成功");
+				plus.nativeUI.closeWaiting();
+				setTimeout(function(){
+					$(".bg_set").val("");
+					$("#demo1").text("受灾日期时间 ...");
+				},300)
+			},
+			error:function(){
+				mui.alert("提交失败")
+				plus.nativeUI.closeWaiting();
+			}
+		})
+	}
+	/*百度地图*/
+	var map = new BMap.Map("allmap");
+    //初始化地图 默认加载北京天安门
+    var point = new BMap.Point(116.331398, 39.897445);
+    map.centerAndZoom(point, 32); //初始化地图，point为中心点，缩放级别为16
+    //判断手机浏览器是否支持定位
+    if(navigator.geolocation) {
+        var geolocation = new BMap.Geolocation(); //创建定位实例
+        geolocation.getCurrentPosition(showLocation, {
+            enableHighAccuracy: true
+        }); //enableHighAccuracy 要求浏览器获取最佳结果
+    } else {
+        map.addControl(new BMap.GeolocationControl()); //添加定位控件 支持定位
+    }
+    var gc = new BMap.Geocoder();//将坐标转换成地址
+
+    //处理定位后的信息
+    function showLocation(r) {
+        if(this.getStatus() == BMAP_STATUS_SUCCESS) { //定位成功
+            //新建中心点 并将地图中心移动过去
+            var centerPoint = new BMap.Point(r.longitude, r.latitude);
+            map.panTo(centerPoint);
+            map.setCenter(centerPoint);
+            gc.getLocation(centerPoint,function(rs){
+                var addComp = rs.addressComponents;  
+                var mapAddress = addComp.province + addComp.city + addComp.district  
+                + addComp.street + addComp.streetNumber;   
+                //mui.alert(mapAddress);
+                var address = document.getElementById('address');
+                address.value=mapAddress;
+                address.readOnly='readonly';
+                console.log(centerPoint.lng,centerPoint.lat)
+                /*经纬度*/
+                address.name=centerPoint.lng;
+                address.title=centerPoint.lat;
+            });
+            //新建标注
+            var mk = new BMap.Marker(centerPoint);
+            mk.disableDragging(); // 不可拖拽
+            map.addOverlay(mk);
+        } else {
+            mui.alert('failed' + this.getStatus()); //定位失败
+        }
+    }
+	(function($) {
+		$.init();
+		var result = $('#result')[0];
+		var btns = $('.btn');
+		btns.each(function(i, btn) {
+			btn.addEventListener('tap', function() {
+				var _self = this;
+				var optionsJson = this.getAttribute('data-options') || '{}';
+				var options = JSON.parse(optionsJson);
+				var id = this.getAttribute('id');
+				_self.picker = new mui.DtPicker({
+					type: "datetime", //设置日历初始视图模式    //真正的月份比写的多一个月。  type的类型你还是可以选择date, datetime month time  hour 
+					beginDate: new Date(2000, 04, 02),
+					endDate: new Date(), //设置结束日期    //真正的是10.21
+				})
+				_self.picker.show(function(rs) {
+					btn.value = rs.text;
+					btn.innerText = rs.text;
+					_self.picker.dispose();
+					_self.picker = null;
+				});
+			}, false);
+		});
+	})(mui);
+	</script>
+</html>

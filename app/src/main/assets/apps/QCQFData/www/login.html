@@ -29,12 +29,12 @@
 				</form>
 				<div class="remember">
 					<!--记住密码-->
-					<div class="remember_left">
+					<!--<div class="remember_left">
 						<div class='checkbox'>
 							<input type='checkbox' id='checkbox1' name='checkboox[]'>
 							<label for='checkbox1'>记住账号</label>
 						</div>
-					</div>
+					</div>-->
 					<!--忘记密码-->
 					<!--<div class="remember_right">
 						<label id="wjmm" class="label_right">忘记密码？</label>
@@ -42,7 +42,7 @@
 				</div>
 				<!--登录按钮-->
 				<div class="mui-content-padded">
-					<button id='login' onclick="remPwd()"  class="mui-btn mui-btn-block mui-btn-primary">登  录</button>
+					<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登  录</button>
 				</div>
 				<script src="js/mui.min.js"></script>
 				<script src="js/ipconfig.js"></script>
@@ -60,11 +60,11 @@
 
 		mui.plusReady(function() {
 
-			if(plus.webview.currentWebview().personID) {
-				setTimeout(function() {
-					plus.webview.close(plus.webview.currentWebview().personID);
-				}, 300);
-			}
+//			if(plus.webview.currentWebview().personID) {
+//				setTimeout(function() {
+//					plus.webview.close(plus.webview.currentWebview().personID);
+//				}, 300);
+//			}
 
 			if(plus.storage.getItem("personal-information")) {
 				mui.openWindow({
@@ -82,12 +82,12 @@
 					if(phone == '') {
 						plus.nativeUI.toast('请输入您的手机号码');
 						return;
-					}else {
+					} else {
 						var setData = {
 							phone: phone,
 						};
 						mui.ajax({
-							url: ipconfig + "station/login/"+phone,
+							url: ipconfig + "station/login/" + phone,
 							data: setData,
 							type: "get",
 							dataType: "json",
@@ -101,12 +101,9 @@
 											show: {
 												duration: 300,
 												aniShow: 'slide-in-bottom'
-											},
-											extras: {
-												loginID: plus.webview.currentWebview().id
 											}
 										});
-
+										
 										break;
 									case 500:
 
@@ -141,18 +138,17 @@
 			};
 		});
 		//将账号与密码保存到Localstore 
-		function remPwd() {
-			var check = document.getElementById("checkbox1");
-			if(check.checked) //判断记住密码项是否勾选，是则记住密码到本地缓存 
-			{	
-				var id = document.getElementById("account").value;
-				localStorage.setItem("account", id);
-			} else //否则就移除本地缓存 
-			{
-				localStorage.removeItem("account");
-			}
-		}
-		console.log(localStorage);
+//		function remPwd() {
+//			var check = document.getElementById("checkbox1");
+//			if(check.checked) //判断记住密码项是否勾选，是则记住密码到本地缓存 
+//			{
+//				var id = document.getElementById("account").value;
+//				localStorage.setItem("account", id);
+//			} else //否则就移除本地缓存 
+//			{
+//				localStorage.removeItem("account");
+//			}
+//		}
 	</script>
 
 </html>

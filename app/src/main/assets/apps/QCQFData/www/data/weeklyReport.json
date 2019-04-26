@@ -1,0 +1,88 @@
+{
+    "meta": {
+        "success": true,
+        "message": "ok"
+    },
+    "data": [
+        {	
+        	"id": "0",
+            "weeklyTownship": "高峰镇",
+            "weeklyReportPerson": "杨峰春",
+            "weeklyEcho": "1",
+            "weeklyThen": "1",
+            "weeklyRate": "100%"
+        },
+        {	
+        	"id": "1",
+            "weeklyTownship": "甘宁镇",
+            "weeklyReportPerson": "彭明生",
+            "weeklyEcho": "1",
+            "weeklyThen": "1",
+            "weeklyRate": "100%"
+        },
+        {	
+        	"id": "2",
+            "weeklyTownship": "龙沙镇",
+            "weeklyReportPerson": "张贵",
+            "weeklyEcho": "1",
+            "weeklyThen": "1",
+            "weeklyRate": "100%"
+        },
+        {	
+        	"id": "3",
+            "weeklyTownship": "响水镇",
+            "weeklyReportPerson": "骆启文",
+            "weeklyEcho": "1",
+            "weeklyThen": "1",
+            "weeklyRate": "100%"
+        },
+        {	
+        	"id": "4",
+            "weeklyTownship": "武陵镇",
+            "weeklyReportPerson": "彭家泉",
+            "weeklyEcho": "1",
+            "weeklyThen": "0",
+            "weeklyRate": "0%"
+        },
+        {	
+        	"id": "5",
+            "weeklyTownship": "瀼渡镇",
+            "weeklyReportPerson": "刘立春",
+            "weeklyEcho": "1",
+            "weeklyThen": "0",
+            "weeklyRate": "0%"
+        },
+        {	
+        	"id": "6",
+            "weeklyTownship": "天城镇",
+            "weeklyReportPerson": "张世成",
+            "weeklyEcho": "1",
+            "weeklyThen": "0",
+            "weeklyRate": "0%"
+        },
+        {	
+        	"id": "7",
+            "weeklyTownship": "熊家镇",
+            "weeklyReportPerson": "易继洪",
+            "weeklyEcho": "1",
+            "weeklyThen": "0",
+            "weeklyRate": "0%"
+        },
+        {	
+        	"id": "8",
+            "weeklyTownship": "小周镇",
+            "weeklyReportPerson": "王洪霞",
+            "weeklyEcho": "1",
+            "weeklyThen": "0",
+            "weeklyRate": "0%"
+        },
+        {	
+        	"id": "9",
+            "weeklyTownship": "大周镇",
+            "weeklyReportPerson": "何克海",
+            "weeklyEcho": "1",
+            "weeklyThen": "0",
+            "weeklyRate": "0%"
+        }
+    ]
+}

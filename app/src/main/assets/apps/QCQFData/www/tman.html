@@ -33,6 +33,9 @@
 					<li class="mui-table-view-cell">
 						<a class="mui-navigate-right" id="update" href="javascript:;">检查更新</a>
 					</li>
+					<li class="mui-table-view-cell" id="ditu">
+						<a class="mui-navigate-right" href="baidumaps.html">百度地图</a>
+					</li>
 				</ul>
 				<ul class="mui-table-view list1" style="margin-top:30px; background: #096993; color: #fff; border-radius: 5px;">
 					<li class="mui-table-view-cell" style="text-align: center;">
@@ -47,35 +50,57 @@
 	<script type="text/javascript" src="js/update.js"></script>
 	<script>
 		mui.init();
-		mui.plusReady(function() {
-			$("#quit").on('tap', function() {
-				var btnArray = ['否', '是'];
-				mui.confirm('确定退出？', '账号退出', btnArray, function(e) {
-					if(e.index == 1) {
-						setTimeout(function() {
-							plus.webview.close(plus.webview.currentWebview().indexID);
-						}, 300);
-						plus.storage.clear();
-						mui.openWindow({
-							url: 'login.html',
-							id: 'login',
-							extras: {
-								personID: plus.webview.currentWebview().id
-							}
-						});
+
+		document.getElementById("quit").addEventListener("tap", function() {
+			var btnArray = ['是', '否'];
+			mui.confirm('您确定退出?', '', btnArray, function(e) {
+				if(e.index == 0) {
+					var wvs, self, launch;
+					wvs = plus.webview.all();
+					self = plus.webview.currentWebview();
+					launch = plus.webview.getLaunchWebview();
+					for(var i = 0, len = wvs.length; i < len; i++) {
+						if(wvs[i].getURL() == self.getURL() || wvs[i].getURL() == launch.getURL()) {
+							continue;
+						}
+						wvs[i].close();
 					}
-				})
-			});
-			
-			var info = JSON.parse(plus.storage.getItem("personal-information"));
-			$('#loginname').html(info[0].iphone);
-			$("#update").on('click',function(){
-				initUpdate();
-			});
-			
+					plus.storage.clear();
+					self.close();
+					mui.openWindow({
+						url: "login.html",
+						id: "login",
+						show: {
+							duration: 300,
+							aniShow: 'slide-in-bottom'
+						}
+					});
+				}
+			})
 		});
 
+		mui.plusReady(function() {
+			var info = JSON.parse(plus.storage.getItem("personal-information"));
+			$('#loginname').html(info[0].iphone);
+			$("#update").on('click', function() {
+				initUpdate();
+			});
 
+			mui('#ditu').on('tap', 'a', function() {
+				var _self = this;
+
+				mui.openWindow({
+					url: _self.href,
+					id: _self.href,
+					show: {
+						autoShow: true,
+						aniShow: 'slide-in-bottom',
+						duration: 300
+					}
+				});
+			});
+
+		});
 	</script>
 
 </html>
